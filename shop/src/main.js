@@ -10,8 +10,10 @@ import 'vant/lib/index.css' //引入vant  css样式
 import {
   Tabbar,
   TabbarItem,
+  Tab, Tabs,
 } from 'vant';
 Vue.use(Tabbar).use(TabbarItem); //Tabbar 标签栏
+Vue.use(Tab).use(Tabs); //顶部标签页
 
 Vue.config.productionTip = false
 

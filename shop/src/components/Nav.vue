@@ -76,6 +76,6 @@ export default {
 
 <style lang="less">
 .van-tabbar {
-  box-shadow: 0px 0px 10px 0px #b2b2b2;
+  box-shadow: 0px 0px 20px -10px #b2b2b2;
 }
 </style>
