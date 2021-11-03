@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="127" height="20" viewBox="0 0 127 20">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 30.45px;
+        fill: #2c3167;
+        font-family: "Segoe Script";
+      }
+    </style>
+  </defs>
+  <text id="camel" class="cls-1" transform="matrix(1.296, -0.002, -0.016, 0.804, -1.737, 18.9)">camel</text>
+</svg>

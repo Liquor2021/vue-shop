@@ -1,12 +1,25 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <!-- 顶部标签栏 -->
+    <top-nav></top-nav>
+
+
+    <!-- 底部标签栏 -->
+    <navs></navs>
+    <router-view />
   </div>
 </template>
 
-<style lang="less">
+<script>
+import navs from "./components/Nav.vue";
+import topNav from "./components/TopNav.vue";
+export default {
+  components: {
+    navs, //底部标签栏
+    topNav//顶部标签栏
+  },
+};
+</script>
 
+<style lang="less">
 </style>
