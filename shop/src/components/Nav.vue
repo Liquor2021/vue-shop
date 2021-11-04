@@ -51,7 +51,6 @@
 export default {
   data() {
     return {
-      active: 0,
       icon: {
         active: require("../assets/img/home1.svg"),
         inactive: require("../assets/img/home.svg"),
@@ -67,8 +66,16 @@ export default {
     };
   },
   components: {},
-  methods: {
-    
+  methods: {},
+  computed: {
+    active: {
+      get() {
+        return this.$root.active;
+      },
+      set(v) {
+        this.$root.active = v;
+      },
+    },
   },
 };
 </script>

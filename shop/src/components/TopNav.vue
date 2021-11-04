@@ -2,14 +2,20 @@
   <!-- 顶部logo栏 -->
   <div class="topNav">
     <div class="logo">
-      <img src="../assets/img/shrink.svg" class="shrink" @click="skip" />
+      <!-- <img src="../assets/img/me_top.svg" class="me_top" /> -->
+      <img src="../assets/img/shrink.svg" class="shrink" @click="shrink" />
       <img src="../assets/img/name1.svg" class="name" />
-      <img src="../assets/img/me_top.svg" class="me_top" />
+      <img src="../assets/img/search.svg" class="search" @click="search" />
     </div>
     <!-- Tab 标签页 -->
     <van-tabs v-model="active" color="#fff" title-inactive-color="#b0b0b0">
-      <van-tab v-for="ta in TabTitle" :key="ta.id" :title="ta.cate_name">
-      </van-tab>
+      <van-tab title="热门推荐" to="/home/recommend"></van-tab>
+      <van-tab title="家电电器" to="/home/appliances"></van-tab>
+      <van-tab title="服饰鞋帽" to="/home/clothing"></van-tab>
+      <van-tab title="影音设备" to="/home/audio"></van-tab>
+      <van-tab title="智能设备" to="/home/smart"></van-tab>
+      <van-tab title="手机数码" to="/home/phone"></van-tab>
+      <van-tab title="居家生活" to="/home/live"></van-tab>
     </van-tabs>
   </div>
 </template>
@@ -18,33 +24,39 @@
 export default {
   data() {
     return {
-      TabTitle: [],
       active: 0,
     };
   },
   methods: {
-    skip() {
-      this.$router.push("/classify");
+    search() {
+      this.$router.push("/search");
     },
-  },
-  created() {
-    this.axios.get("/category").then((res) => {
-      this.TabTitle = res.data;
-    });
+    shrink() {
+      if (this.$root.active != 2) {
+        this.$router.push("/classify");
+      }
+    },
+    recommend(){
+      this.$router.push("/home/recommend");
+    },
   },
 };
 </script>
 
 <style lang="less">
 .topNav {
+  position: sticky;
+  top: 0;
   box-shadow: 0px 0px 20px -10px #b2b2b2;
+  z-index: 10;
   .logo {
     box-sizing: border-box;
     width: 100vw;
     height: 45px;
     display: flex;
     padding: 6px 12px;
-    .shrink {
+    background-color: #fff;
+    .search {
       cursor: pointer;
       width: 20px;
     }
@@ -54,7 +66,7 @@ export default {
       height: 25px;
       transform: translateY(4px);
     }
-    .me_top {
+    .shrink {
       cursor: pointer;
       width: 20px;
     }
