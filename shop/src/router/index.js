@@ -33,10 +33,10 @@ const routes = [{
         component: () => import('../views/Audio'),
       },
       {
-        path: '/home/smart',
-        name: 'Smart',
+        path: '/home/food',
+        name: 'Food',
         props: true,
-        component: () => import('../views/Smart'),
+        component: () => import('../views/Food'),
       },
       {
         path: '/home/phone',
