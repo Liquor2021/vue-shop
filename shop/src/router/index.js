@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Appliances from '../views/Appliances.vue'
 
 Vue.use(VueRouter)
 
@@ -19,7 +18,7 @@ const routes = [{
         path: '/home/appliances',
         name: 'Appliances',
         props: true,
-        component: Appliances,
+        component:  () => import('../views/Appliances'),
       },
       {
         path: '/home/clothing',

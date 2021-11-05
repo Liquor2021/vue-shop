@@ -6,7 +6,7 @@
           :src="b.pic"
           alt=""
           class="banner_img"
-          @click="b_click($event, b.id)"
+          @click="b_click($event, b)"
         />
       </van-swipe-item>
     </van-swipe>

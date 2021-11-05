@@ -11,11 +11,49 @@
       <span><img src="../assets/img/com_5.png" /><b>专店查询</b></span>
     </div>
 
+    <!-- 商城快报 -->
+    <van-notice-bar :scrollable="false" background="#fff">
+      <template #left-icon>
+        <img :src="icons[0].left" class="ico" />
+      </template>
+      <van-swipe
+        vertical
+        class="notice-swipe"
+        :autoplay="3000"
+        :show-indicators="false"
+      >
+        <van-swipe-item v-for="ro in index.roll" :key="ro.id">{{
+          ro.info
+        }}</van-swipe-item>
+      </van-swipe>
+    </van-notice-bar>
+
     <!-- 新品上线 -->
     <h2>新品上线</h2>
     <div class="img_box" v-for="re in rec_child.children" :key="re.id">
       <img :src="re.pic" />
     </div>
+
+    <!-- 选购攻略 id 1681 -->
+    <h2>选购攻略</h2>
+    <banner :banner="icons[1]" class="ban2"></banner>
+
+    <!-- 猜你喜欢 -->
+    <h2>猜你喜欢</h2>
+    <van-grid :gutter="5" :column-num="3" class="rec_like" v-if="index.info">
+      <van-grid-item v-for="value in imgs" :key="value.id" text="文字">
+        <template #icon>
+          <img :src="value.image" class="rec_like_img" />
+        </template>
+        <template #text>
+          <b class="rec_like_name">{{ value.store_name }}</b>
+          <p class="rec_like_price">￥{{ value.price }}</p>
+        </template>
+      </van-grid-item>
+    </van-grid>
+
+    <!-- 官方 -->
+    <img src="../assets/img/bottom.webp" class="rec_bottom" />
   </div>
 </template>
 
@@ -27,11 +65,33 @@ export default {
     return {
       index: [],
       rec_child: [],
+      imgs: [],
+      icons: [
+        {
+          left: require("../assets/img/news.png"),
+        },
+        [
+          {
+            id: 1681,
+            pic: require("../assets/img/banner1.webp"),
+          },
+          {
+            id: 1682,
+            pic: require("../assets/img/banner2.webp"),
+          },
+          {
+            id: 1683,
+            pic: require("../assets/img/banner3.webp"),
+          },
+        ],
+      ],
     };
   },
   created() {
     this.axios.get("/index").then((res) => {
       this.index = res.data;
+      let resu = res.data.info.bastList;
+      this.imgs = resu.splice(0, 1).concat(resu.splice(1));
     });
     this.axios.get("/category").then((res) => {
       this.rec_child = res.data[5];
@@ -50,9 +110,10 @@ export default {
 </script>
 
 
-<style lang="less" scoped>
+<style lang="less">
 .recommend {
   background-color: #f6f6f6;
+  padding-bottom: 40px;
 }
 .grid {
   width: 100%;
@@ -103,5 +164,73 @@ h2 {
     height: 325px;
     border-radius: 10px;
   }
+}
+
+.notice-swipe {
+  height: 40px;
+  line-height: 40px;
+}
+.ico {
+  width: 60px;
+  height: 14px;
+}
+.van-notice-bar {
+  height: 37px;
+  .van-notice-bar__wrap {
+    padding-left: 10px;
+    margin-left: 10px;
+    box-sizing: border-box;
+    height: 20px;
+    border-left: 1px solid #ccc;
+  }
+}
+
+.ban2 {
+  margin-top: 10px;
+  img {
+    width: 365px;
+    cursor: pointer;
+  }
+}
+
+.rec_like {
+  margin-top: 15px;
+  .van-grid-item__content {
+    cursor: pointer;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    font-size: 12px;
+
+    .rec_like_img {
+      width: 118px;
+      height: 118px;
+    }
+  }
+  .rec_like_name {
+    margin-top: 10px;
+    width: 95px;
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    font-family: "微软雅黑";
+    height: 13px;
+    // font-weight: bold;
+    // transform: scale(.9);
+  }
+  .rec_like_price {
+    margin-top: 5px;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.rec_bottom {
+  width: 100%;
+  margin-top: 10px;
 }
 </style>

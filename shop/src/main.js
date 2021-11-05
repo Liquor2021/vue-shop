@@ -13,11 +13,13 @@ import {
   Tab, Tabs,
   Swipe, SwipeItem,
   Grid, GridItem,
+  NoticeBar,
 } from 'vant';
 Vue.use(Tabbar).use(TabbarItem); //Tabbar 标签栏
 Vue.use(Tab).use(Tabs); //顶部标签页
 Vue.use(Swipe).use(SwipeItem);//热门推荐轮播图
 Vue.use(Grid).use(GridItem);//热门推荐-宫格
+Vue.use(NoticeBar);//热门推荐-通知栏
 
 Vue.config.productionTip = false
 

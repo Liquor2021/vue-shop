@@ -12,9 +12,9 @@
       <van-tab title="热门推荐" to="/home/recommend"></van-tab>
       <van-tab title="家电电器" to="/home/appliances"></van-tab>
       <van-tab title="服饰鞋帽" to="/home/clothing"></van-tab>
-      <van-tab title="影音设备" to="/home/audio"></van-tab>
+      <van-tab title="影音数码" to="/home/audio"></van-tab>
       <van-tab title="智能设备" to="/home/smart"></van-tab>
-      <van-tab title="手机数码" to="/home/phone"></van-tab>
+      <!-- <van-tab title="手机数码" to="/home/phone"></van-tab> -->
       <van-tab title="居家生活" to="/home/live"></van-tab>
     </van-tabs>
   </div>
