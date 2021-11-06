@@ -13,6 +13,9 @@ export default {
       clothing,
     };
   },
+  created(){
+    window.scrollTo(0, 0);
+  },
   components: {
     page,
   },

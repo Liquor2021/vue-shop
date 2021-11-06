@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- 底部标签栏 -->
-    <navs></navs>
+    <navs v-if="this.$route.meta.navs"></navs>
     <router-view />
   </div>
 </template>

@@ -31,6 +31,9 @@ export default {
       appliance,
     };
   },
+  created(){
+    window.scrollTo(0, 0);
+  },
   components: {
     // banner, //家电轮播图
     // ProductList,//产品列表

@@ -1,8 +1,8 @@
 <template>
-  <!-- 新品页面 -->
-  <div class="new">
+  <!-- 新品上市 -->
+  <div class="NewArrival">
       <!-- 导航栏 -->
-    <!-- <back :title="name"></back> -->
+    <back :title="name"></back>
 
     <img
       v-for="nm in NewArrival[0].material"
@@ -42,7 +42,7 @@
 
 <script>
 import NewArrival from "../mock-data/newArrival";
-// import back from "../components/Back.vue";
+import back from "../components/Back.vue";
 export default {
   data() {
     return {
@@ -50,20 +50,16 @@ export default {
       name:'新品上市',
     };
   },
-  created(){
-    window.scrollTo(0, 0);
-  },
   components: {
-      // back,
+      back,
   },
 };
 </script>
 
 
 <style lang="less" >
-.new {
+.NewArrival {
   background-color: rgb(239, 135, 131);
-  padding-bottom: 50px;
 }
 .new_material {
   display: block;

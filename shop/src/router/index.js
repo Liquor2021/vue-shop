@@ -7,75 +7,95 @@ const routes = [{
     path: '/home',
     name: 'Home',
     component: () => import('../views/Home.vue'),
+    meta:{'navs':true},
     children: [
       {
         path: '/home/recommend',
         name: 'Recommend',
         props: true,
+        meta:{'navs':true},
         component: () => import('../views/Recommend'),
       },
       {
         path: '/home/appliances',
         name: 'Appliances',
         props: true,
+        meta:{'navs':true},
         component:  () => import('../views/Appliances'),
       },
       {
         path: '/home/clothing',
         name: 'Clothing',
         props: true,
+        meta:{'navs':true},
         component: () => import('../views/Clothing'),
       },
       {
         path: '/home/audio',
         name: 'Audio',
         props: true,
+        meta:{'navs':true},
         component: () => import('../views/Audio'),
       },
       {
         path: '/home/food',
         name: 'Food',
         props: true,
+        meta:{'navs':true},
         component: () => import('../views/Food'),
       },
       {
-        path: '/home/phone',
-        name: 'Phone',
+        path: '/home/life',
+        name: 'Life',
         props: true,
-        component: () => import('../views/Phone'),
-      },
-      {
-        path: '/home/live',
-        name: 'Live',
-        props: true,
-        component: () => import('../views/Live'),
+        meta:{'navs':true},
+        component: () => import('../views/Life'),
       },
     ],
   },
   {
     path: '/new',
     name: 'New',
+    meta:{'navs':true},
     component: () => import('../views/New.vue')
   },
   {
     path: '/classify',
     name: 'Classify',
+    meta:{'navs':true},
     component: () => import('../views/Classify.vue')
   },
   {
     path: '/cart',
     name: 'Cart',
+    meta:{'navs':true},
     component: () => import('../views/Cart.vue')
   },
   {
     path: '/me',
     name: 'Me',
+    meta:{'navs':true},
     component: () => import('../views/Me.vue')
   },
   {
     path: '/search',
     name: 'Search',
     component: () => import('../views/Search.vue')
+  },
+  {
+    path: '/newArrival',
+    name: 'NewArrival',
+    component: () => import('../views/NewArrival.vue')
+  },
+  {
+    path: '/hot',
+    name: 'Hot',
+    component: () => import('../views/Hot.vue')
+  },
+  {
+    path: '/coupon',
+    name: 'Coupon',
+    component: () => import('../views/Coupon.vue')
   },
 ]
 

@@ -14,8 +14,7 @@
       <van-tab title="服饰鞋帽" to="/home/clothing"></van-tab>
       <van-tab title="影音数码" to="/home/audio"></van-tab>
       <van-tab title="零食水果" to="/home/food"></van-tab>
-      <!-- <van-tab title="手机数码" to="/home/phone"></van-tab> -->
-      <van-tab title="居家生活" to="/home/live"></van-tab>
+      <van-tab title="居家生活" to="/home/life"></van-tab>
     </van-tabs>
   </div>
 </template>

@@ -1,4 +1,4 @@
-#b2b2b2     //边框颜色 (灰色)box-shadow: 0px 0px 10px 0px #b2b2b2;
+#b2b2b2     //边框颜色 (灰色)box-shadow: 0px 0px 10px 0px #e0e0e0;
 #2c3167      //主题色 （深紫色）
 #9299ea      //副主题色 （浅紫色）
 

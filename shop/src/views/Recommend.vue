@@ -4,11 +4,25 @@
     <banner :banner="index.banner"></banner>
 
     <div class="grid">
+      <!-- 每日签到 -->
       <span><img src="../assets/img/com_1.png" /><b>每日签到</b></span>
-      <span><img src="../assets/img/com_2.png" /><b>新品上市</b></span>
-      <span><img src="../assets/img/com_3.gif" /><b>热卖榜</b></span>
-      <span><img src="../assets/img/com_4.png" /><b>领券中心</b></span>
-      <span><img src="../assets/img/com_5.png" /><b>专店查询</b></span>
+      <!-- 新品上市 -->
+      <span @click="$router.push('/newArrival')">
+        <img src="../assets/img/com_2.png" />
+        <b>新品上市</b>
+      </span>
+      <!-- 热卖榜 -->
+      <span @click="$router.push('/hot')">
+        <img src="../assets/img/com_3.gif" />
+        <b>热卖榜</b>
+      </span>
+      <!-- 领券中心 -->
+      <span @click="$router.push('/coupon')">
+        <img src="../assets/img/com_4.png" />
+        <b>领券中心</b>
+      </span>
+      <!-- 专店查询 -->
+      <!-- <span><img src="../assets/img/com_5.png" /><b>专店查询</b></span> -->
     </div>
 
     <!-- 商城快报 -->
@@ -32,11 +46,13 @@
     <h2>新品上线</h2>
     <div class="img_box" v-for="re in rec_child.children" :key="re.id">
       <img :src="re.pic" />
+      <h5 class="bef">新品上线 立即选购</h5>
+      <img :src="icons[1].right" class="ic_right">
     </div>
 
     <!-- 选购攻略 id 1681 -->
     <h2>选购攻略</h2>
-    <banner :banner="icons[1]" class="ban2"></banner>
+    <banner :banner="icons[2]" class="ban2"></banner>
 
     <!-- 猜你喜欢 -->
     <h2>猜你喜欢</h2>
@@ -69,6 +85,9 @@ export default {
       icons: [
         {
           left: require("../assets/img/news.png"),
+        },
+        {
+          right: require('../assets/img/right.svg'),
         },
         [
           {
@@ -152,6 +171,7 @@ h2 {
   box-sizing: border-box;
 }
 .img_box {
+  position: relative;
   display: block;
   width: 100%;
   height: 325px;
@@ -163,6 +183,20 @@ h2 {
     width: 100%;
     height: 325px;
     border-radius: 10px;
+  }
+  .bef {
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px;
+    left: 20%;
+    color: #2c3167;
+  }
+  .ic_right{
+    position: absolute;
+    bottom: 10px;
+    left: 75%;
+    width: 24px;
+    height: 24px;
   }
 }
 

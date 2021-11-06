@@ -1,16 +1,16 @@
 <template>
-  <div class="food">
-    <page :arr="food"></page>
+  <div class="life">
+    <page :arr="life"></page>
   </div>
 </template>
 
 <script>
-import food from "../mock-data/food";
+import life from "../mock-data/life";
 import page from "../components/Page.vue";
 export default {
   data() {
     return {
-      food,
+      life,
     };
   },
   created(){
