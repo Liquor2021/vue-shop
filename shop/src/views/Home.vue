@@ -24,6 +24,11 @@ export default {
       this.$router.push("/home/recommend");
     }
   },
+  updated(){
+      if (this.$route.name == "Home") {
+      this.$router.push("/home/recommend");
+    }
+  },
   beforeRouteUpdated() {
     // console.log(this.$route.params.id);
     // this.id=this.$route.params.id;

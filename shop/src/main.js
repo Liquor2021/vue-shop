@@ -15,7 +15,8 @@ import {
   Grid, GridItem,
   NoticeBar,
   Button,
-  NavBar
+  NavBar,
+  Divider,
 } from 'vant';
 Vue.use(Tabbar).use(TabbarItem); //Tabbar 标签栏
 Vue.use(Tab).use(Tabs); //顶部标签页
@@ -24,6 +25,7 @@ Vue.use(Grid).use(GridItem);//热门推荐-宫格
 Vue.use(NoticeBar);//热门推荐-通知栏
 Vue.use(Button);//按钮
 Vue.use(NavBar);//导航栏
+Vue.use(Divider);//分割线
 
 Vue.config.productionTip = false
 
