@@ -1,4 +1,5 @@
 <template>
+  <!-- 评价中心 -->
   <div class="evaluate">
     <back :title="name"></back>
     <van-tabs
@@ -142,14 +143,14 @@ export default {
   background-color: #f6f6f6;
   height: 100vh;
   svg {
-      display: block;
-      margin: 150px auto;
-      margin-bottom: 20px;
+    display: block;
+    margin: 150px auto;
+    margin-bottom: 20px;
   }
   p {
-      font-size: 14px;
-      text-align: center;
-      color: #aaaaaa;
+    font-size: 14px;
+    text-align: center;
+    color: #aaaaaa;
   }
 }
 </style>

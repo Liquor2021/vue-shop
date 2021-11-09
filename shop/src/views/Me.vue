@@ -32,7 +32,10 @@
     <div class="order">
       <div class="or_top">
         <span class="my_order">我的订单</span>
-        <span class="all_order" @click="$router.push({path:'/plan',query:{active:0}})">
+        <span
+          class="all_order"
+          @click="$router.push({ path: '/plan', query: { active: 0 } })"
+        >
           全部订单
           <img src="../assets/img/me/right.svg" class="or_right" />
         </span>
@@ -43,23 +46,32 @@
           <img :src="m.pic" class="or_pic" />
           <p class="or_msg">{{ m.msg }}</p>
         </div> -->
-        <div class="or_smbox" @click="$router.push({path:'/plan',query:{active:1}})">
+        <div
+          class="or_smbox"
+          @click="$router.push({ path: '/plan', query: { active: 1 } })"
+        >
           <img :src="me[0].myOrder[0].pic" class="or_pic" />
           <p class="or_msg">{{ me[0].myOrder[0].msg }}</p>
         </div>
-        <div class="or_smbox" @click="$router.push({path:'/plan',query:{active:2}})">
+        <div
+          class="or_smbox"
+          @click="$router.push({ path: '/plan', query: { active: 2 } })"
+        >
           <img :src="me[0].myOrder[1].pic" class="or_pic" />
           <p class="or_msg">{{ me[0].myOrder[1].msg }}</p>
         </div>
-        <div class="or_smbox" @click="$router.push({path:'/plan',query:{active:3}})">
+        <div
+          class="or_smbox"
+          @click="$router.push({ path: '/plan', query: { active: 3 } })"
+        >
           <img :src="me[0].myOrder[2].pic" class="or_pic" />
           <p class="or_msg">{{ me[0].myOrder[2].msg }}</p>
         </div>
-        <div class="or_smbox" @click="$router.push('evaluate')">
+        <div class="or_smbox" @click="$router.push('/evaluate')">
           <img :src="me[0].myOrder[3].pic" class="or_pic" />
           <p class="or_msg">{{ me[0].myOrder[3].msg }}</p>
         </div>
-        <div class="or_smbox">
+        <div class="or_smbox" @click="$router.push('/refund')">
           <img :src="me[0].myOrder[4].pic" class="or_pic" />
           <p class="or_msg">{{ me[0].myOrder[4].msg }}</p>
         </div>
@@ -78,29 +90,56 @@
             <img :src="m.pic" class="or_pic" />
             <p class="or_msg">{{ m.msg }}</p>
           </div> -->
-          <div class="or_smbox four">
+          <div class="or_smbox four" @click="$router.push('/coin')">
             <img :src="me[0].equities[0].pic" class="or_pic" />
             <p class="or_msg">{{ me[0].equities[0].msg }}</p>
           </div>
-          <div class="or_smbox four">
+          <div class="or_smbox four" @click="$router.push('/coupon')">
             <img :src="me[0].equities[1].pic" class="or_pic" />
             <p class="or_msg">{{ me[0].equities[1].msg }}</p>
           </div>
-          <div class="or_smbox four">
+          <div class="or_smbox four" @click="$router.push('/activity')">
             <img :src="me[0].equities[2].pic" class="or_pic" />
             <p class="or_msg">{{ me[0].equities[2].msg }}</p>
           </div>
-          <div class="or_smbox four">
+          <div class="or_smbox four" @click="$router.push('/integral')">
             <img :src="me[0].equities[3].pic" class="or_pic" />
             <p class="or_msg">{{ me[0].equities[3].msg }}</p>
           </div>
-          <div class="or_smbox four">
+          <div class="or_smbox four" @click="$router.push('/shop')">
             <img :src="me[0].equities[4].pic" class="or_pic" />
             <p class="or_msg">{{ me[0].equities[4].msg }}</p>
           </div>
-          <div class="or_smbox four">
+          <div class="or_smbox four" @click="$router.push('/footprint')">
             <img :src="me[0].equities[5].pic" class="or_pic" />
             <p class="or_msg">{{ me[0].equities[5].msg }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 自助服务 -->
+    <div class="equities">
+      <div class="order">
+        <div class="or_top">
+          <span class="my_order">自助服务</span>
+        </div>
+        <div class="or_bottom">
+          <div class="or_smbox four" @click="$router.push('/coin')">
+            <img :src="me[0].serve[0].pic" class="or_pic" />
+            <p class="or_msg">{{ me[0].serve[0].msg }}</p>
+          </div>
+          <div class="or_smbox four" @click="$router.push('/coin')">
+            <img :src="me[0].serve[1].pic" class="or_pic" />
+            <p class="or_msg">{{ me[0].serve[1].msg }}</p>
+          </div>
+          <div class="or_smbox four" @click="$router.push('/coin')">
+            <img :src="me[0].serve[2].pic" class="or_pic" />
+            <p class="or_msg">{{ me[0].serve[2].msg }}</p>
+          </div>
+          <div class="or_smbox four" @click="$router.push('/coin')">
+            <img :src="me[0].serve[3].pic" class="or_pic" />
+            <p class="or_msg">{{ me[0].serve[3].msg }}</p>
           </div>
         </div>
       </div>
@@ -164,6 +203,7 @@ export default {
       position: absolute;
       box-sizing: border-box;
       padding: 0 20px;
+      padding-right: 10px;
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
@@ -189,10 +229,11 @@ export default {
       }
       h2 {
         font-size: 12px;
+        transform: scale(0.9);
         span {
           display: inline-block;
           font-size: 12px;
-          transform: scale(0.9);
+          // transform: scale(0.9);
         }
         b {
           cursor: pointer;
@@ -201,14 +242,14 @@ export default {
           padding: 5px 8px;
           color: rgb(0, 0, 0);
           font-size: 12px;
-          // margin-left: 0px;
+          margin-left: 5px;
         }
       }
     }
   }
   .order {
     box-sizing: border-box;
-    margin: 20px auto;
+    margin: 15px auto;
     width: 359px;
     height: 110px;
     background-color: #fff;

@@ -59,5 +59,27 @@ export default[
                 msg:'我的足迹',
             },
         ],
+        serve:[// 自助服务
+            {
+                id:512,
+                pic: require("../assets/img/me/c1.svg"),
+                msg:'收货地址',
+            },
+            {
+                id:513,
+                pic: require("../assets/img/me/c2.svg"),
+                msg:'我的余额',
+            },
+            {
+                id:514,
+                pic: require("../assets/img/me/c3.svg"),
+                msg:'我的收藏',
+            },
+            {
+                id:515,
+                pic: require("../assets/img/me/c4.svg"),
+                msg:'联系客服',
+            }
+        ]
     }
 ]
