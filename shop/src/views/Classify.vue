@@ -2,7 +2,7 @@
   <!-- 分类 -->
   <div class="classify">
     <!-- 搜索框 -->
-    <van-search v-model="value" placeholder="请输入搜索关键词" class="classify_search"/>
+    <van-search v-model="value" placeholder="请输入搜索关键词" class="classify_search" @focus="$router.push('/search')"/>
     <!-- 分类内容 -->
     <van-tabs
       v-model="active"

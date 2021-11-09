@@ -18,6 +18,7 @@ import {
   NavBar,
   Divider,
   Search ,
+  Image as VanImage,
 } from 'vant';
 Vue.use(Tabbar).use(TabbarItem); //Tabbar 标签栏
 Vue.use(Tab).use(Tabs); //顶部标签页
@@ -28,6 +29,7 @@ Vue.use(Button);//按钮
 Vue.use(NavBar);//导航栏
 Vue.use(Divider);//分割线
 Vue.use(Search);//搜索
+Vue.use(VanImage);//Image图片
 
 Vue.config.productionTip = false
 

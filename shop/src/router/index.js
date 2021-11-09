@@ -104,6 +104,16 @@ const routes = [
     name: 'Coupon',
     component: () => import('../views/Coupon.vue')
   },
+  {//我的订单进度
+    path: '/plan',
+    name: 'Plan',
+    component: () => import('../views/Plan.vue')
+  },
+  {//我的评价
+    path: '/evaluate',
+    name: 'Evaluate',
+    component: () => import('../views/Evaluate.vue')
+  },
 ]
 
 const router = new VueRouter({

@@ -190,6 +190,8 @@ h2 {
     bottom: 10px;
     left: 20%;
     color: #2c3167;
+    font-size: 24px;
+    transform: translateY(-1px);
   }
   .ic_right{
     position: absolute;
