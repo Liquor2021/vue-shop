@@ -144,6 +144,16 @@ const routes = [
     name: 'Footprint',
     component: () => import('../views/Footprint.vue')
   },
+  {//设置
+    path: '/set',
+    name: 'Set',
+    component: () => import('../views/Set.vue')
+  },
+  {//修改密码
+    path: '/password',
+    name: 'Password',
+    component: () => import('../views/Password.vue')
+  },
 ]
 
 const router = new VueRouter({

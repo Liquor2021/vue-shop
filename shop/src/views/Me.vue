@@ -4,7 +4,7 @@
     <!-- 个人信息 -->
     <div class="msg">
       <!-- 设置 -->
-      <img src="../assets/img/me/set.svg" class="set" />
+      <img src="../assets/img/me/set.svg" class="set" @click="$router.push('/set')"/>
 
       <!-- 头像账号 -->
       <van-image
@@ -157,6 +157,9 @@ export default {
       me,
     };
   },
+  created(){
+    this.$root.active = 4;
+  }
 };
 </script>
 

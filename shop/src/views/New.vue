@@ -1,7 +1,7 @@
 <template>
   <!-- 新品页面 -->
   <div class="new">
-      <!-- 导航栏 -->
+    <!-- 导航栏 -->
     <!-- <back :title="name"></back> -->
 
     <img
@@ -30,13 +30,18 @@
         <template #text>
           <b class="NewArrival_name">{{ value.msg }}</b>
           <p class="NewArrival_price">￥{{ value.price }}</p>
-          <h2 class="NewArrival_repertory" v-if="value.repertory>0">立即购买</h2>
-          <van-button disabled class="NewArrival_repertory zero" v-if="value.repertory==0">已抢光</van-button>
+          <h2 class="NewArrival_repertory" v-if="value.repertory > 0">
+            立即购买
+          </h2>
+          <van-button
+            disabled
+            class="NewArrival_repertory zero"
+            v-if="value.repertory == 0"
+            >已抢光</van-button
+          >
         </template>
       </van-grid-item>
     </van-grid>
-
-    
   </div>
 </template>
 
@@ -52,6 +57,7 @@ export default {
   },
   created(){
     window.scrollTo(0, 0);
+    this.$root.active = 1;
   },
   components: {
       // back,
@@ -79,7 +85,7 @@ export default {
     margin-top: 0px;
     margin-bottom: 6px;
     .van-grid-item__content {
-        border-radius: 3%;
+      border-radius: 3%;
     }
   }
   .NewArrival_img {
@@ -107,20 +113,20 @@ export default {
     margin-top: 8px;
   }
   .NewArrival_repertory {
-      width: 100%;
-      background-color: rgb(235,71,59);
-      color: #fff;
-      font-size: 16px;
-      margin-top: 5px;
-      border-radius: 15px;
-      height: 32px;
-      line-height: 32px;
-      text-align: center;
-      padding-left: 0px;
+    width: 100%;
+    background-color: rgb(235, 71, 59);
+    color: #fff;
+    font-size: 16px;
+    margin-top: 5px;
+    border-radius: 15px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    padding-left: 0px;
   }
   .zero {
-      background-color: rgb(153,153,153);
-      padding-left: 15px;
+    background-color: rgb(153, 153, 153);
+    padding-left: 15px;
   }
 }
 </style>

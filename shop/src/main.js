@@ -19,6 +19,8 @@ import {
   Divider,
   Search ,
   Image as VanImage,
+  Cell, CellGroup,
+  Form ,Field ,
 } from 'vant';
 Vue.use(Tabbar).use(TabbarItem); //Tabbar 标签栏
 Vue.use(Tab).use(Tabs); //顶部标签页
@@ -30,6 +32,8 @@ Vue.use(NavBar);//导航栏
 Vue.use(Divider);//分割线
 Vue.use(Search);//搜索
 Vue.use(VanImage);//Image图片
+Vue.use(Cell).use(CellGroup);//单元格
+Vue.use(Form).use(Field)//表单
 
 Vue.config.productionTip = false
 
