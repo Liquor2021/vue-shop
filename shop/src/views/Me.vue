@@ -4,7 +4,18 @@
     <!-- 个人信息 -->
     <div class="msg">
       <!-- 设置 -->
-      <img src="../assets/img/me/set.svg" class="set" @click="$router.push('/set')"/>
+      <img
+        src="../assets/img/me/set.svg"
+        class="me_set"
+        @click="$router.push('/set')"
+      />
+
+      <img
+        src="../assets/img/me/left.svg"
+        class="me_back"
+        v-show="!me_show"
+        @click="back"
+      />
 
       <!-- 头像账号 -->
       <van-image
@@ -24,12 +35,17 @@
       <div class="grow">
         <!-- 等级 -->
         <h1 class="or_v"><b>V1</b><span>0 成长值</span></h1>
-        <h2><span>骆驼会员 享更多优惠</span> <b>会员权益</b></h2>
+        <h2 class="or_h2">
+          <span class="orh2_grow">骆驼会员 享更多优惠</span>
+          <b @click="tomember">会员权益</b>
+        </h2>
       </div>
     </div>
+    <!-- 会员特权说明 -->
+    <router-view :show="me_show"/>
 
     <!-- 我的订单 -->
-    <div class="order">
+    <div class="order" v-show="me_show">
       <div class="or_top">
         <span class="my_order">我的订单</span>
         <span
@@ -79,7 +95,7 @@
     </div>
 
     <!-- 我的权益 -->
-    <div class="equities">
+    <div class="equities" v-show="me_show">
       <div class="order big">
         <div class="or_top">
           <span class="my_order">我的权益</span>
@@ -119,7 +135,7 @@
     </div>
 
     <!-- 自助服务 -->
-    <div class="equities">
+    <div class="equities" v-show="me_show">
       <div class="order">
         <div class="or_top">
           <span class="my_order">自助服务</span>
@@ -155,10 +171,21 @@ export default {
   data() {
     return {
       me,
+      me_show: true,
     };
   },
-  created(){
+  created() {
     this.$root.active = 4;
+  },
+  methods:{
+    back(){
+      this.$router.back();
+      this.me_show = true;
+    },
+    tomember(){
+      this.$router.push('/member');
+      this.me_show = false;
+    }
   }
 };
 </script>
@@ -168,12 +195,20 @@ export default {
 <style lang="less" scoped>
 .me {
   background-color: #f6f6f6;
-  height: 100vh;
+  min-height: 100vh;
   .msg {
     background-color: #2c3167;
     height: 165px;
     position: relative;
-    .set {
+    .me_back {
+      position: absolute;
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      left: 10px;
+      top: 10px;
+    }
+    .me_set {
       position: absolute;
       cursor: pointer;
       width: 28px;
@@ -230,10 +265,10 @@ export default {
           margin-right: 5px;
         }
       }
-      h2 {
+      .or_h2 {
         font-size: 12px;
         transform: scale(0.9);
-        span {
+        .orh2_grow {
           display: inline-block;
           font-size: 12px;
           // transform: scale(0.9);
@@ -245,7 +280,7 @@ export default {
           padding: 5px 8px;
           color: rgb(0, 0, 0);
           font-size: 12px;
-          margin-left: 5px;
+          margin-left: 8px;
         }
       }
     }

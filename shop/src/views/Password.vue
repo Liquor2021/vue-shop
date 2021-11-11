@@ -8,14 +8,20 @@
         v-model="value1"
         name="pattern"
         placeholder="设置新密码"
-        :rules="[{ pattern, message: '6位以上的数字' }]"
+        :rules="[
+          { required: true, message: '请输入密码' ,trigger:'onSubmit'},
+          { pattern, message: '6位以上的数字' ,trigger:'onSubmit'},
+        ]"
       />
       <!-- 通过 validator 进行函数校验 -->
       <van-field
         v-model="value2"
         name="validator"
         placeholder="确认密码"
-        :rules="[{ validator, message: '密码不对应' }]"
+        :rules="[
+          { required: true, message: '请确认密码' ,trigger:'onSubmit'},
+          { validator, message: '密码不对应' ,trigger:'onSubmit'},
+        ]"
       />
       <!-- 通过 validator 进行异步函数校验 -->
       <van-field
@@ -96,8 +102,8 @@ export default {
       height: 30px;
     }
     .sub {
-        margin-top: 60px;
-        background-color: #2c3167;
+      margin-top: 60px;
+      background-color: #2c3167;
     }
   }
 }

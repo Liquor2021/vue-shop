@@ -43,7 +43,7 @@
     </van-notice-bar>
 
     <!-- 新品上线 -->
-    <h2>新品上线</h2>
+    <h2 class="rec_h2">新品上线</h2>
     <div class="img_box" v-for="re in rec_child.children" :key="re.id">
       <img :src="re.pic" />
       <h5 class="bef">新品上线 立即选购</h5>
@@ -51,11 +51,11 @@
     </div>
 
     <!-- 选购攻略 id 1681 -->
-    <h2>选购攻略</h2>
+    <h2 class="rec_h2">选购攻略</h2>
     <banner :banner="icons[2]" class="ban2"></banner>
 
     <!-- 猜你喜欢 -->
-    <h2>猜你喜欢</h2>
+    <h2 class="rec_h2">猜你喜欢</h2>
     <van-grid :gutter="5" :column-num="3" class="rec_like" v-if="index.info">
       <van-grid-item v-for="value in imgs" :key="value.id" text="文字">
         <template #icon>
@@ -107,6 +107,7 @@ export default {
     };
   },
   created() {
+    this.$root.active=0;
     this.axios.get("/index").then((res) => {
       this.index = res.data;
       let resu = res.data.info.bastList;
@@ -162,7 +163,7 @@ export default {
   }
 }
 
-h2 {
+.rec_h2 {
   margin-top: 20px;
   font-size: 18px;
   width: 100%;

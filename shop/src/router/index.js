@@ -1,61 +1,81 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Load from '../views/Load.vue'
+import vuexs from '@/store/index'
+//重写VueRouter的push函数
+const OriginPush = VueRouter.prototype.push
+VueRouter.prototype.push = function (location, onResolve, onReject) {
+  if (onResolve || onReject) return OriginPush.call(this.location, onReject, onResolve)
+  //如果出现异常不显示异常
+  return OriginPush.call(this, location).catch(err => err);
+}
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path:'/',
-    name:'Load',
-    component:Load,
+const routes = [{
+    path: '/',
+    name: 'Load',
+    component: Load,
   },
   {
     path: '/home',
     name: 'Home',
     component: () => import('../views/Home.vue'),
-    meta:{'navs':true},
-    children: [
-      {
+    meta: {
+      'navs': true
+    },
+    children: [{
         path: '/home/recommend',
         name: 'Recommend',
         props: true,
-        meta:{'navs':true},
+        meta: {
+          'navs': true
+        },
         component: () => import('../views/Recommend'),
       },
       {
         path: '/home/appliances',
         name: 'Appliances',
         props: true,
-        meta:{'navs':true},
-        component:  () => import('../views/Appliances'),
+        meta: {
+          'navs': true
+        },
+        component: () => import('../views/Appliances'),
       },
       {
         path: '/home/clothing',
         name: 'Clothing',
         props: true,
-        meta:{'navs':true},
+        meta: {
+          'navs': true
+        },
         component: () => import('../views/Clothing'),
       },
       {
         path: '/home/audio',
         name: 'Audio',
         props: true,
-        meta:{'navs':true},
+        meta: {
+          'navs': true
+        },
         component: () => import('../views/Audio'),
       },
       {
         path: '/home/food',
         name: 'Food',
         props: true,
-        meta:{'navs':true},
+        meta: {
+          'navs': true
+        },
         component: () => import('../views/Food'),
       },
       {
         path: '/home/life',
         name: 'Life',
         props: true,
-        meta:{'navs':true},
+        meta: {
+          'navs': true
+        },
         component: () => import('../views/Life'),
       },
     ],
@@ -63,26 +83,40 @@ const routes = [
   {
     path: '/new',
     name: 'New',
-    meta:{'navs':true},
+    meta: {
+      'navs': true
+    },
     component: () => import('../views/New.vue')
   },
   {
     path: '/classify',
     name: 'Classify',
-    meta:{'navs':true},
+    meta: {
+      'navs': true
+    },
     component: () => import('../views/Classify.vue')
   },
   {
     path: '/cart',
     name: 'Cart',
-    meta:{'navs':true},
+    meta: {
+      'navs': true
+    },
     component: () => import('../views/Cart.vue')
   },
   {
     path: '/me',
     name: 'Me',
-    meta:{'navs':true},
-    component: () => import('../views/Me.vue')
+    meta: {
+      'navs': true,
+      'login': true
+    },
+    component: () => import('../views/Me.vue'),
+    children: [{ //会员特权
+      path: '/member',
+      name: 'Member',
+      component: () => import('../views/Member.vue'),
+    }]
   },
   {
     path: '/search',
@@ -99,65 +133,79 @@ const routes = [
     name: 'Hot',
     component: () => import('../views/Hot.vue')
   },
-  {//领券中心
+  { //领券中心
     path: '/coupon',
     name: 'Coupon',
     component: () => import('../views/Coupon.vue')
   },
-  {//我的订单进度
+  { //我的订单进度
     path: '/plan',
     name: 'Plan',
     component: () => import('../views/Plan.vue')
   },
-  {//我的评价
+  { //我的评价
     path: '/evaluate',
     name: 'Evaluate',
     component: () => import('../views/Evaluate.vue')
   },
-  {//售后/退款
+  { //售后/退款
     path: '/refund',
     name: 'Refund',
     component: () => import('../views/Refund.vue')
   },
-  {//C币专享
+  { //C币专享
     path: '/coin',
     name: 'Coin',
     component: () => import('../views/Coin.vue')
   },
-  {//我的活动
+  { //我的活动
     path: '/activity',
     name: 'Activity',
     component: () => import('../views/Activity.vue')
   },
-  {//积分兑换
+  { //积分兑换
     path: '/integral',
     name: 'Integral',
     component: () => import('../views/Integral.vue')
   },
-  {//积分商城
+  { //积分商城
     path: '/shop',
     name: 'Shop',
     component: () => import('../views/Shop.vue')
   },
-  {//我的足迹
+  { //我的足迹
     path: '/footprint',
     name: 'Footprint',
     component: () => import('../views/Footprint.vue')
   },
-  {//设置
+  { //设置
     path: '/set',
     name: 'Set',
     component: () => import('../views/Set.vue')
   },
-  {//修改密码
+  { //修改密码
     path: '/password',
     name: 'Password',
     component: () => import('../views/Password.vue')
+  },
+  { //登陆界面
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/Login.vue')
   },
 ]
 
 const router = new VueRouter({
   routes
+});
+
+//全局路由守卫
+router.beforeEach((to, from, next) => {
+  if (to.meta.login && !vuexs.getters.logintoken) {
+    next('/login')
+  } else {
+    next();
+  }
 })
 
 export default router
