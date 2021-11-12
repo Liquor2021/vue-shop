@@ -1,4 +1,5 @@
 <template>
+  <!-- 短信验证  -->
   <div class="phone">
     <van-form @submit="onSubmit">
       <van-field
@@ -35,15 +36,12 @@
             type="primary"
             native-type="button"
             class="phone_butt"
-            disabled
+            :disabled="isSend"
             @click="sendCode"
-            >发送验证码</van-button
+            >{{ !isSend ? "发送验证码" : counter + "秒后继续发送" }}</van-button
           >
         </template>
       </van-field>
-      <!-- <van-button native-type="button" class="phone_butt"
-        >发送验证码</van-button
-      > -->
 
       <div style="margin: 40px 14px">
         <van-button block type="info" native-type="submit" class="phone_sub"
@@ -57,14 +55,16 @@
 
 <script>
 import { Toast } from "vant";
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
       account: "",
       password: "",
-      val: "123456",
       sendkey: "",
-      counter:60,
+      counter: 60,
+      isSend: false,
+      TimeID: null,
     };
   },
   created() {
@@ -75,42 +75,69 @@ export default {
     });
   },
   methods: {
+    ...mapMutations(["saveToken"]),
     onSubmit(values) {
       console.log("submit", values);
-      this.axios.post("/login", values).then((res) => {
-        console.log(res);
-      });
+      this.axios
+        .post("/login/mobile", {
+          phone: this.account,
+          captcha: this.password,
+          spread: null,
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.status == 200) {
+            this.saveToken(res.data.token);
+            // toast关闭时的回调函数
+            this.$toast.success({
+              message:res.msg,
+              onClose:()=>{
+                this.$router.back();
+               }
+            });
+          } else {
+            this.$toast.fail(res.msg);
+          }
+        });
     },
     // 校验函数返回 true 表示校验通过，false 表示不通过
     validator(val) {
       return /1\d{10}/.test(val);
     },
     // 异步校验函数返回 Promise
-    asyncValidator(val) {
+    asyncValidator() {
       return new Promise((resolve) => {
         Toast.loading("验证中...");
 
         setTimeout(() => {
           Toast.clear();
-          resolve(val == this.val);
+          resolve(true);
         }, 1000);
       });
     },
     sendCode() {
-      // if(!this.account || this.account.length!=11){
-      //   this.$toast("手机号码格式错误");
-      // }
+      //发送验证码
       this.axios
-        .post("/login", {
+        .post("/register/verify", {
           code: "",
           key: this.sendkey,
           phone: this.account,
           type: "login",
         })
         .then((res) => {
-          if(res.status==200){
+          console.log(res);
+          if (res.status == 200) {
             this.$toast.success(res.msg);
-          }else{
+            this.isSend = true;
+            this.TimeID = setInterval(() => {
+              if (this.counter == 0) {
+                this.isSend = false;
+                clearInterval(this.TimeID);
+                return;
+              }
+              this.counter--;
+            }, 1000);
+          } else {
             // console.log(res);
             this.$toast.fail(res.msg);
           }

@@ -29,7 +29,7 @@
         >
         <!-- 产品 -->
         <van-grid :column-num="3" :border="false">
-          <van-grid-item v-for="ch in c.children" :key="ch.id">
+          <van-grid-item v-for="ch in c.children" :key="ch.id" @click="classify_page($event,ch.id)">
             <img :src="ch.pic" class="classify_img" />
             <b class="classify_name">{{ ch.cate_name }}</b>
           </van-grid-item>
@@ -57,6 +57,12 @@ export default {
       this.classify = res.data;
     });
   },
+  methods:{
+    classify_page(event,id){
+      console.log(id);
+      this.$router.push({path:'/ClassifyList',query:{id:id}})
+    }
+  }
 };
 </script>
 

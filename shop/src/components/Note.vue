@@ -1,5 +1,5 @@
 <template>
-  <!-- 短信验证 -->
+  <!-- 手机登录 -->
   <div class="note">
     <van-form @submit="onSubmit">
       <van-field
@@ -50,7 +50,7 @@ export default {
   methods: {
     ...mapMutations(["saveToken"]),
     onSubmit(values) {
-      //   console.log("submit", values);
+        console.log("submit", values);
       this.axios.post("/login", values).then((res) => {
         if (res.status == 400) {
           this.$toast("登陆失败");

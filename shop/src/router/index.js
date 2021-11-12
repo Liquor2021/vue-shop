@@ -193,6 +193,11 @@ const routes = [{
     name: 'Login',
     component: () => import('../views/Login.vue')
   },
+  { //分类商品列表
+    path: '/ClassifyList',
+    name: 'ClassifyList',
+    component: () => import('../views/ClassifyList.vue')
+  },
 ]
 
 const router = new VueRouter({
