@@ -2,7 +2,7 @@ export default [{ //序列号12  电视
     "status": 200,
     "store_name": "ok",
     "data": [{
-            id: 8,
+            id: 129,
             image: require("../assets/img/appliances/b3.jpg"),
             store_name: '华为智慧屏 SE 55英寸 超薄全面屏 广色域鸿鹄画质 超高清智能液晶电视HD55DESA 2+16GB【搭载HarmonyOS 2】',
             price: 1999,

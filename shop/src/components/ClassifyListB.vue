@@ -1,43 +1,58 @@
 <template>
   <van-grid
-    :gutter="0"
+    :gutter="6"
     :column-num="2"
-    class="product"
+    class="productb"
     v-if="product"
     :border="false"
   >
-    <van-grid-item v-for="value in product" :key="value.id" class="product_box">
+    <van-grid-item
+      v-for="value in product"
+      :key="value.id"
+      class="productb_box"
+      @click="ToDetails($event,value)"
+    >
       <template #icon>
-        <img :src="value.image" class="product_img" />
+        <img :src="value.image" class="productb_img" />
       </template>
       <template #text>
-        <b class="product_name">{{ value.store_name }}</b>
-        <p class="product_price">￥{{ value.price }}</p>
+        <b class="productb_name">{{ value.store_name }}</b>
+        <p class="productb_price">￥{{ value.price }}</p>
       </template>
     </van-grid-item>
   </van-grid>
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 export default {
   props: ["product"],
+  methods:{
+    ...mapMutations(["msg"]),
+    ToDetails(event,value){
+      this.$router.push({path:'/details',query:{id:value.id}});
+      this.msg(value);
+    }
+  }
 };
 </script>
 
 <style lang="less" >
-.product {
-  cursor: pointer;
-  padding-left: 10px;
-  padding-right: 5px;
-  .product_box {
-    padding-right: 5px;
-    margin-top: 0px;
-    margin-bottom: 0px;
+.productb {
+  // padding-left: 10px;
+  // padding-right: 5px;
+  margin-top: 6px;
+  .productb_box {
+    cursor: pointer;
+    //   padding-right: 5px;
+    //   margin-top: 0px;
+    //   margin-bottom: 0px;
   }
-  .product_img {
+  .productb_img {
     width: 100%;
+    // height: 162px;
   }
-  .product_name {
+  .productb_name {
     margin-top: 10px;
     width: 150px;
     text-overflow: -o-ellipsis-lastline;
@@ -51,7 +66,7 @@ export default {
     height: 14px;
     font-size: 13px;
   }
-  .product_price {
+  .productb_price {
     color: rgb(217, 22, 28);
     font-size: 18px;
     width: 100%;

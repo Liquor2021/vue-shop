@@ -47,7 +47,7 @@
     <div class="img_box" v-for="re in rec_child.children" :key="re.id">
       <img :src="re.pic" />
       <h5 class="bef">新品上线 立即选购</h5>
-      <img :src="icons[1].right" class="ic_right">
+      <img :src="icons[1].right" class="ic_right" />
     </div>
 
     <!-- 选购攻略 id 1681 -->
@@ -57,7 +57,12 @@
     <!-- 猜你喜欢 -->
     <h2 class="rec_h2">猜你喜欢</h2>
     <van-grid :gutter="5" :column-num="3" class="rec_like" v-if="index.info">
-      <van-grid-item v-for="value in imgs" :key="value.id" text="文字">
+      <van-grid-item
+        v-for="value in imgs"
+        :key="value.id"
+        text="文字"
+        @click="ToDetails($event, value)"
+      >
         <template #icon>
           <img :src="value.image" class="rec_like_img" />
         </template>
@@ -74,6 +79,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import banner from "../components/Banner.vue";
 export default {
   //   props: ["id"],
@@ -87,7 +93,7 @@ export default {
           left: require("../assets/img/news.png"),
         },
         {
-          right: require('../assets/img/right.svg'),
+          right: require("../assets/img/right.svg"),
         },
         [
           {
@@ -107,7 +113,7 @@ export default {
     };
   },
   created() {
-    this.$root.active=0;
+    this.$root.active = 0;
     this.axios.get("/index").then((res) => {
       this.index = res.data;
       let resu = res.data.info.bastList;
@@ -116,6 +122,13 @@ export default {
     this.axios.get("/category").then((res) => {
       this.rec_child = res.data[5];
     });
+  },
+  methods: {
+    ...mapMutations(["msg"]),
+    ToDetails(event, value) {
+      this.$router.push({ path: "/details", query: { id: value.id } });
+      this.msg(value);
+    },
   },
   mounted() {},
   watch: {
@@ -194,7 +207,7 @@ export default {
     font-size: 24px;
     transform: translateY(-1px);
   }
-  .ic_right{
+  .ic_right {
     position: absolute;
     bottom: 10px;
     left: 75%;

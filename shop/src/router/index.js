@@ -198,6 +198,16 @@ const routes = [{
     name: 'ClassifyList',
     component: () => import('../views/ClassifyList.vue')
   },
+  { //商品详情
+    path: '/details',
+    name: 'Details',
+    component: () => import('../views/Details.vue')
+  },
+  { //商品详情
+    path: '/details1',
+    name: 'Details1',
+    component: () => import('../views/Details1.vue')
+  },
 ]
 
 const router = new VueRouter({

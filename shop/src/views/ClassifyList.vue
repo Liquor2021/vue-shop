@@ -1,4 +1,5 @@
 <template>
+  <!-- 商品分类列表 -->
   <div class="ClassifyList">
     <!-- 搜索栏 -->
     <div class="ClassifyList_search">
@@ -35,15 +36,14 @@
       </li>
     </ul>
 
-
     <!-- 商品列表 -->
     <classify-listb :product="classify_res"></classify-listb>
-
   </div>
 </template>
 
 <script>
-import ClassifyListb from '../components/ClassifyListB.vue'
+import ClassifyListb from "../components/ClassifyListB.vue";
+import tv from "../mock-data/tv";
 export default {
   data() {
     return {
@@ -51,10 +51,11 @@ export default {
       color2: true,
       back: 1,
       classify_res: [],
+      tv,
     };
   },
-  components:{
-      ClassifyListb,
+  components: {
+    ClassifyListb,
   },
   methods: {
     price() {
@@ -115,14 +116,22 @@ export default {
     },
   },
   created() {
-    this.res();
+    if (this.$route.query.id == 29) {
+      this.classify_res = this.tv[0].data;
+    } else {
+      this.res();
+    }
   },
   watch: {
     back() {
       if (this.back == 3) {
         this.popularity();
+        this.color1 = true;
+        this.color2 = true;
       } else if (this.back == 1 || this.back == 2) {
         this.res();
+        this.color1 = true;
+        this.color2 = true;
       } else if (this.color1 == false) {
         this.asc();
       } else if (this.color2 == false) {

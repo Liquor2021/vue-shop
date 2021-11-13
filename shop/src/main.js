@@ -23,6 +23,11 @@ import {
   Form ,Field ,
   Toast,
   Dialog,
+  Area,
+  GoodsAction, GoodsActionIcon, GoodsActionButton,
+  Sku,
+  Overlay,
+  Popup,
 } from 'vant';
 Vue.use(Tabbar).use(TabbarItem); //Tabbar 标签栏
 Vue.use(Tab).use(Tabs); //顶部标签页
@@ -37,7 +42,12 @@ Vue.use(VanImage);//Image图片
 Vue.use(Cell).use(CellGroup);//单元格
 Vue.use(Form).use(Field);//表单
 Vue.use(Toast);//轻提示
-Vue.use(Dialog);
+Vue.use(Dialog);//弹出框
+Vue.use(Area);//省市区选择
+Vue.use(GoodsAction).use(GoodsActionIcon).use(GoodsActionButton);//商品导航栏
+Vue.use(Sku);//商品规格
+Vue.use(Overlay);//遮罩层
+Vue.use(Popup);//弹出层
 
 Vue.config.productionTip = false
 

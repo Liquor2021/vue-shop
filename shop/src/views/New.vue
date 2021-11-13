@@ -30,7 +30,11 @@
         <template #text>
           <b class="NewArrival_name">{{ value.msg }}</b>
           <p class="NewArrival_price">￥{{ value.price }}</p>
-          <h2 class="NewArrival_repertory" v-if="value.repertory > 0">
+          <h2
+            class="NewArrival_repertory"
+            v-if="value.repertory > 0"
+            @click="ToDetails($event, value)"
+          >
             立即购买
           </h2>
           <van-button
@@ -47,21 +51,26 @@
 
 <script>
 import NewArrival from "../mock-data/newArrival";
-// import back from "../components/Back.vue";
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
       NewArrival,
-      name:'新品上市',
+      name: "新品上市",
     };
   },
-  created(){
+  created() {
     window.scrollTo(0, 0);
     this.$root.active = 1;
   },
-  components: {
-      // back,
+  methods: {
+    ...mapMutations(["msg"]),
+    ToDetails(event, value) {
+      this.$router.push({ path: "/details1", query: { id: value.id } });
+      this.msg(value);
+    },
   },
+  components: {},
 };
 </script>
 

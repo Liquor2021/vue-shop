@@ -1,6 +1,18 @@
 <template>
-  <van-grid :gutter="0" :column-num="2" class="product" v-if="product" :border=false>
-    <van-grid-item v-for="value in product" :key="value.id" class="product_box">
+  <!-- 分类产品列表 -->
+  <van-grid
+    :gutter="0"
+    :column-num="2"
+    class="product"
+    v-if="product"
+    :border="false"
+  >
+    <van-grid-item
+      v-for="value in product"
+      :key="value.id"
+      class="product_box"
+      @click="ToDetails($event, value)"
+    >
       <template #icon>
         <img :src="value.pic" class="product_img" />
       </template>
@@ -13,8 +25,16 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   props: ["product"],
+  methods: {
+    ...mapMutations(["msg"]),
+    ToDetails(event, value) {
+      this.$router.push({ path: "/details1", query: { id: value.id } });
+      this.msg(value);
+    },
+  },
 };
 </script>
 
@@ -23,10 +43,10 @@ export default {
   cursor: pointer;
   padding-left: 10px;
   padding-right: 5px;
-  .product_box{
-      padding-right: 5px;
-      margin-top: 0px;
-      margin-bottom: 0px;
+  .product_box {
+    padding-right: 5px;
+    margin-top: 0px;
+    margin-bottom: 0px;
   }
   .product_img {
     width: 100%;
@@ -46,11 +66,11 @@ export default {
     font-size: 13px;
   }
   .product_price {
-      color: rgb(217, 22, 28);
-      font-size: 18px;
-      width: 100%;
-      text-align: left;
-      margin-top: 8px;
+    color: rgb(217, 22, 28);
+    font-size: 18px;
+    width: 100%;
+    text-align: left;
+    margin-top: 8px;
   }
 }
 </style>

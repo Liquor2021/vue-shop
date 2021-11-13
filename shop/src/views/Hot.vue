@@ -30,7 +30,13 @@
         <template #text>
           <b class="hot_name">{{ value.msg }}</b>
           <p class="hot_price">￥{{ value.price }}</p>
-          <h2 class="hot_repertory" v-if="value.repertory > 0">立即购买</h2>
+          <h2
+            class="hot_repertory"
+            v-if="value.repertory > 0"
+            @click="ToDetails($event, value)"
+          >
+            立即购买
+          </h2>
           <van-button
             disabled
             class="hot_repertory zero"
@@ -62,7 +68,13 @@
         <template #text>
           <b class="hot_name">{{ value.msg }}</b>
           <p class="hot_price">￥{{ value.price }}</p>
-          <h2 class="hot_repertory" v-if="value.repertory > 0">立即购买</h2>
+          <h2
+            class="hot_repertory"
+            v-if="value.repertory > 0"
+            @click="ToDetails($event, value)"
+          >
+            立即购买
+          </h2>
           <van-button
             disabled
             class="hot_repertory zero"
@@ -78,12 +90,20 @@
 <script>
 import hot from "../mock-data/hot";
 import back from "../components/Back.vue";
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
       hot,
       name: "热卖榜",
     };
+  },
+  methods: {
+    ...mapMutations(["msg"]),
+    ToDetails(event, value) {
+      this.$router.push({ path: "/details1", query: { id: value.id } });
+      this.msg(value);
+    },
   },
   components: {
     back,
