@@ -26,7 +26,7 @@
     <!-- 轮播图 -->
     <van-swipe class="my-swipe" :autoplay="4000" indicator-color="black">
       <van-swipe-item v-for="(b, index) in banner" :key="index">
-        <img :src="b" alt="" class="details_img" />
+        <img :src="b.pic" alt="" class="details_img" />
       </van-swipe-item>
     </van-swipe>
 
@@ -83,7 +83,7 @@
 
     <!-- 详情 -->
     <h1 class="pic_nav">图片详情</h1>
-    <img :src="b" v-for="(b, i) in banner" :key="i" class="Dpic" />
+    <img :src="b.pic" v-for="(b, i) in banner" :key="i" class="Dpic" />
 
     <!-- 商品导航栏 -->
     <shop-navs :msg="msgg"></shop-navs>
@@ -112,14 +112,6 @@ export default {
     };
   },
   methods: {
-    // get(val) {
-    //   console.log(val);
-    //   if (!val) return;
-    //   this.axios.get(`product/detail/${val}`).then((res) => {
-    //     console.log(res);
-    //     this.banner = res.data.storeInfo.slider_image; //轮播图
-    //   });
-    // },
     //显示弹出层
     showPopup() {
       this.Topshow = true;
@@ -148,14 +140,14 @@ export default {
     window.scrollTo(0, 0);
     if (this.msg.id) {
       this.msgg=this.msg;
-      this.banner.push(this.msg.pic);
+      this.banner=this.msg.children;
       this.price=this.msg.price;
       this.sales=parseInt(this.msg.price/5);
       this.store_name=this.msg.msg;
     } else {
       let a = JSON.parse(localStorage.getItem("msg"));
       this.msgg=a;
-      this.banner.push(a.pic);
+      this.banner=a.children;
       this.price=a.price;
       this.sales=parseInt(a.price/2);
       this.store_name=a.msg;

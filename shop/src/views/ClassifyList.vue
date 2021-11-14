@@ -4,7 +4,11 @@
     <!-- 搜索栏 -->
     <div class="ClassifyList_search">
       <img src="../assets/img/left.svg" @click="$router.back()" />
-      <input type="text" placeholder="更多好货期待你的探索" />
+      <input
+        type="text"
+        placeholder="更多好货期待你的探索"
+        @click="$router.push('/search')"
+      />
       <img
         src="../assets/img/home.svg"
         class="classHome"

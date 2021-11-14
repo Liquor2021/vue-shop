@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   props: ["msg"],
   data() {
@@ -130,6 +131,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["addcart"]),
     onStar() {
       if (this.colorshow == "#ccc") {
         this.text = "已收藏";
@@ -152,8 +154,13 @@ export default {
       this.show = false;
     },
     //添加购物车
-    onAddCartClicked() {
+    onAddCartClicked(event) {
+      // console.log(event);
       this.show = false;
+      //把购买数量添加进去
+      this.msg.selectedNum=event.selectedNum;
+      this.msg.ze=false;
+      this.addcart(this.msg);
     },
   },
 };

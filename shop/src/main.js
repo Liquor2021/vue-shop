@@ -28,6 +28,12 @@ import {
   Sku,
   Overlay,
   Popup,
+  SubmitBar ,
+  Icon,
+  RadioGroup, Radio,
+  Checkbox, CheckboxGroup,
+  SwipeCell,
+  Card ,
 } from 'vant';
 Vue.use(Tabbar).use(TabbarItem); //Tabbar 标签栏
 Vue.use(Tab).use(Tabs); //顶部标签页
@@ -48,6 +54,12 @@ Vue.use(GoodsAction).use(GoodsActionIcon).use(GoodsActionButton);//商品导航�
 Vue.use(Sku);//商品规格
 Vue.use(Overlay);//遮罩层
 Vue.use(Popup);//弹出层
+Vue.use(SubmitBar);//提交订单栏
+Vue.use(Icon);//图标
+Vue.use(Radio).use(RadioGroup);//单选框
+Vue.use(Checkbox).use(CheckboxGroup);//复选框
+Vue.use(SwipeCell);//滑动单元格
+Vue.use(Card);//商品卡片
 
 Vue.config.productionTip = false
 

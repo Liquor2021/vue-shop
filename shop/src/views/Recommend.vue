@@ -44,10 +44,10 @@
 
     <!-- 新品上线 -->
     <h2 class="rec_h2">新品上线</h2>
-    <div class="img_box" v-for="re in rec_child.children" :key="re.id">
+    <div class="img_box" v-for="re in recommend_new[0].data" :key="re.id" @click="ToDetails1($event, re)">
       <img :src="re.pic" />
-      <h5 class="bef">新品上线 立即选购</h5>
-      <img :src="icons[1].right" class="ic_right" />
+      <!-- <h5 class="bef">新品上线 立即选购</h5> -->
+      <!-- <img :src="icons[1].right" class="ic_right" /> -->
     </div>
 
     <!-- 选购攻略 id 1681 -->
@@ -81,10 +81,12 @@
 <script>
 import { mapMutations } from "vuex";
 import banner from "../components/Banner.vue";
+import recommend_new from '../mock-data/recommend_new'
 export default {
   //   props: ["id"],
   data() {
     return {
+      recommend_new,
       index: [],
       rec_child: [],
       imgs: [],
@@ -127,6 +129,10 @@ export default {
     ...mapMutations(["msg"]),
     ToDetails(event, value) {
       this.$router.push({ path: "/details", query: { id: value.id } });
+      this.msg(value);
+    },
+    ToDetails1(event, value) {
+      this.$router.push({ path: "/details2", query: { id: value.id } });
       this.msg(value);
     },
   },

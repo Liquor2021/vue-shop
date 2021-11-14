@@ -10,10 +10,13 @@
       v-for="value in product"
       :key="value.id"
       class="productb_box"
-      @click="ToDetails($event,value)"
+      @click="ToDetails($event, value)"
     >
       <template #icon>
-        <img :src="value.image" class="productb_img" />
+        <!-- <img :src="value.image" class="productb_img" /> -->
+        <van-image :src="value.image" class="productb_img">
+          <template v-slot:error>加载失败</template>
+        </van-image>
       </template>
       <template #text>
         <b class="productb_name">{{ value.store_name }}</b>
@@ -24,16 +27,16 @@
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
+import { mapMutations } from "vuex";
 export default {
   props: ["product"],
-  methods:{
+  methods: {
     ...mapMutations(["msg"]),
-    ToDetails(event,value){
-      this.$router.push({path:'/details',query:{id:value.id}});
+    ToDetails(event, value) {
+      this.$router.push({ path: "/details", query: { id: value.id } });
       this.msg(value);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -50,7 +53,7 @@ export default {
   }
   .productb_img {
     width: 100%;
-    // height: 162px;
+    height: 162px;
   }
   .productb_name {
     margin-top: 10px;

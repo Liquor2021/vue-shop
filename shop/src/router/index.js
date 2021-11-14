@@ -198,15 +198,20 @@ const routes = [{
     name: 'ClassifyList',
     component: () => import('../views/ClassifyList.vue')
   },
-  { //商品详情
+  { //商品详情--数据
     path: '/details',
     name: 'Details',
     component: () => import('../views/Details.vue')
   },
-  { //商品详情
+  { //商品详情1--jsoip
     path: '/details1',
     name: 'Details1',
     component: () => import('../views/Details1.vue')
+  },
+  { //商品详情2 --首页新品
+    path: '/details2',
+    name: 'Details2',
+    component: () => import('../views/Details2.vue')
   },
 ]
 
