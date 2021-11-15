@@ -213,6 +213,26 @@ const routes = [{
     name: 'Details2',
     component: () => import('../views/Details2.vue')
   },
+  { //收货地址
+    path: '/address',
+    name: 'Address',
+    component: () => import('../views/Address.vue')
+  },
+  { //收货地址
+    path: '/editaddress',
+    name: 'Editaddress',
+    component: () => import('../views/Editaddress.vue')
+  },
+  { //收货地址1
+    path: '/editaddress1',
+    name: 'Editaddress1',
+    component: () => import('../views/Editaddress1.vue')
+  },
+  { //提交订单
+    path: '/submit',
+    name: 'Submit',
+    component: () => import('../views/Submit.vue')
+  },
 ]
 
 const router = new VueRouter({

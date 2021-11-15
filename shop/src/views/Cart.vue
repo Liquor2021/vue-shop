@@ -89,7 +89,7 @@
       :price="num"
       button-text="提交订单"
       tip="你的收货地址不支持同城送, 我们已为你推荐快递"
-      @submit="onSubmit"
+      @submit="submit"
       v-show="!edit"
     >
       <van-checkbox v-model="checked" @click="all">全选</van-checkbox>
@@ -118,7 +118,11 @@ export default {
   },
   methods: {
     ...mapMutations(["removecart", "delecart"]),
-    //提交订单按钮点击事件回调
+    // 提交订单
+    submit(){
+      this.$router.push("/submit");
+    },
+    //下面删除按钮点击事件回调
     onSubmit(event) {
       if (this.checked) {
         this.removecart();

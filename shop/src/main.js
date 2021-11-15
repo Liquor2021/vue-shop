@@ -6,6 +6,7 @@ import store from './store'
 import 'reset-css' //引入重置样式
 import "amfe-flexible/index" //rem字体大小
 import 'vant/lib/index.css' //引入vant  css样式
+import 'font-awesome/css/font-awesome.min.css'//图标库
 
 import {
   Tabbar,
@@ -34,6 +35,10 @@ import {
   Checkbox, CheckboxGroup,
   SwipeCell,
   Card ,
+  ContactCard,
+  AddressList,
+  AddressEdit,
+  CouponCell, CouponList,
 } from 'vant';
 Vue.use(Tabbar).use(TabbarItem); //Tabbar 标签栏
 Vue.use(Tab).use(Tabs); //顶部标签页
@@ -60,6 +65,10 @@ Vue.use(Radio).use(RadioGroup);//单选框
 Vue.use(Checkbox).use(CheckboxGroup);//复选框
 Vue.use(SwipeCell);//滑动单元格
 Vue.use(Card);//商品卡片
+Vue.use(ContactCard);//联系人卡片
+Vue.use(AddressList);//地址列表
+Vue.use(AddressEdit);//地址编辑
+Vue.use(CouponCell).use(CouponList);//优惠券选择器
 
 Vue.config.productionTip = false
 

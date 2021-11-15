@@ -85,7 +85,7 @@ export default {
           spread: null,
         })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.status == 200) {
             this.saveToken(res.data.token);
             // toast关闭时的回调函数
