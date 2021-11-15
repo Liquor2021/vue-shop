@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Cookies from 'js-cookie'
-import { Toast } from 'vant'
+import {
+  Toast
+} from 'vant'
 
 Vue.use(Vuex)
 
@@ -11,7 +13,8 @@ export default new Vuex.Store({
     msg: [], //被点击商品信息
     cartShop: ["1"], //购物车商品
     orders: [], //订单数据
-    money: 0 //余额
+    money: 0, //余额
+    waits: [], //存储已完成待发货的订单数据
   },
   getters: {
     //localStorage获取
@@ -62,6 +65,13 @@ export default new Vuex.Store({
         }
       }
       return state.money;
+    },
+    // 获取待发货
+    getsend(state) {
+      if (state.waits == null || state.waits.length < 1) {
+        state.waits = JSON.parse(localStorage.getItem("waits"));
+      }
+      return state.waits;
     },
   },
   mutations: {
@@ -139,11 +149,24 @@ export default new Vuex.Store({
     //消费余额
     paymoney(state, payload) {
       state.money = Number(state.money) - payload;
-      if (state.money<0) {
+      if (state.money < 0) {
         Toast.fail("余额不足，支付失败 !");
         return;
       }
       localStorage.setItem("money", JSON.stringify(state.money));
+    },
+    //存储已完成待发货的订单数据
+    waitSend(state, payload) {
+      if (state.waits == null || state.waits.length < 1) {
+        state.waits = payload;
+        if (typeof state.waits == Object) {
+          state.waits = Array(state.waits);
+        }
+        localStorage.setItem("waits", JSON.stringify(state.waits));
+      } else {
+        state.waits.push(payload);
+        localStorage.setItem("waits", JSON.stringify(state.waits));
+      }
     }
   },
   actions: {},

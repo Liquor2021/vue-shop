@@ -168,7 +168,7 @@ export default {
     }, 1000);
   },
   methods: {
-    ...mapMutations(["removeOrder", "paymoney"]),
+    ...mapMutations(["removeOrder", "paymoney", "waitSend"]),
     onChange(index) {
       //   this.showList = false;
       this.chosenCoupon = index;
@@ -184,15 +184,29 @@ export default {
         this.paymoney(this.Allprice / 100);
         // 余额大于消费额才跳转
         if (this.money > this.Allprice / 100) {
+          this.waitSend(this.orders);
+          // 提交加载动画
           Toast.loading({
-            message: "订单支付成功，正在跳转...",
+            message: "订单支付成功...",
             forbidClick: true,
           });
           let t = setTimeout(() => {
+            //   获取提交时间
+            let date = new Date();
+            let Y = date.getFullYear().toString();
+            let M = (date.getMonth() + 1).toString();
+            let D = date.getDate().toString();
+            let h = date.getHours().toString();
+            let m = date.getMinutes().toString();
+            let s = date.getSeconds().toString();
+            h = h < 10 ? "0" + h : h;
+            m = m < 10 ? "0" + m : m;
+            s = s < 10 ? "0" + s : s;
+            let time = `${Y}-${M}-${D} ${h}:${m}:${s}`;
             clearTimeout(t);
             this.$router.push({
               path: "/PaySucceed",
-              query: { pay: this.Allprice / 100 },
+              query: { pay: this.Allprice / 100, time: time },
             });
           }, 1000);
         }
@@ -223,7 +237,7 @@ export default {
   position: relative;
   background-color: #f6f6f6;
   min-height: 100vh;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
   .card {
     margin-top: 2px;
     padding-bottom: 44px;
@@ -280,6 +294,7 @@ export default {
   .sub_pay {
     background-color: #fff;
     margin-top: 10px;
+    margin-bottom: 40px;
     h1 {
       font-size: 14px;
       border: none;

@@ -117,7 +117,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["removecart", "delecart","order"]),
+    ...mapMutations(["removecart", "delecart","order","removeOrder"]),
 
     // get() {
     //   this.axios
@@ -214,6 +214,8 @@ export default {
     },
   },
   created() {
+    // 清空订单数据
+    this.removeOrder();
     this.$root.active = 3;
     this.num = Number(localStorage.getItem("num"));
     if (localStorage.getItem("checked") == "false") {

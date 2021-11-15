@@ -40,6 +40,7 @@ import {
   AddressEdit,
   CouponCell, CouponList,
   Loading,
+  Step, Steps,
 } from 'vant';
 Vue.use(Tabbar).use(TabbarItem); //Tabbar 标签栏
 Vue.use(Tab).use(Tabs); //顶部标签页
@@ -71,6 +72,7 @@ Vue.use(AddressList);//地址列表
 Vue.use(AddressEdit);//地址编辑
 Vue.use(CouponCell).use(CouponList);//优惠券选择器
 Vue.use(Loading);//加载
+Vue.use(Step).use(Steps);//步骤条
 
 Vue.config.productionTip = false
 
