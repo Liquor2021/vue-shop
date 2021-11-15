@@ -233,6 +233,11 @@ const routes = [{
     name: 'Submit',
     component: () => import('../views/Submit.vue')
   },
+  { //订单支付成功
+    path: '/PaySucceed',
+    name: 'PaySucceed',
+    component: () => import('../views/PaySucceed.vue')
+  },
 ]
 
 const router = new VueRouter({

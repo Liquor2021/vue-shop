@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Cookies from 'js-cookie'
+import { Toast } from 'vant'
 
 Vue.use(Vuex)
 
@@ -9,6 +10,8 @@ export default new Vuex.Store({
     token: null,
     msg: [], //被点击商品信息
     cartShop: ["1"], //购物车商品
+    orders: [], //订单数据
+    money: 0 //余额
   },
   getters: {
     //localStorage获取
@@ -41,7 +44,25 @@ export default new Vuex.Store({
       }
       // console.log(state.cartShop);
       return state.cartShop;
-    }
+    },
+    //获取订单信息
+    getOrders(state) {
+      if (state.orders == null || state.orders.length < 1) {
+        state.orders = JSON.parse(localStorage.getItem("orders"));
+      }
+      return state.orders;
+    },
+    // 获取余额
+    getmoney(state) {
+      if (state.money == null || state.money < 1) {
+        state.money = Number(JSON.parse(localStorage.getItem("money")));
+        if (state.money <= 0 || state.money == null) {
+          state.money = 88888;
+          localStorage.setItem("money", JSON.stringify(state.money));
+        }
+      }
+      return state.money;
+    },
   },
   mutations: {
     //保存登录token
@@ -98,10 +119,32 @@ export default new Vuex.Store({
           return;
         }
       }
-      // let index = state.cartShop.lastIndexOf(payload);
-      // state.cartShop.splice(index, 1);
-      // localStorage.setItem("cartShop", JSON.stringify(state.cartShop));
     },
+    //加入订单
+    order(state, payload) {
+      if (state.orders.length < 1) {
+        state.orders = payload;
+        state.orders = Array(state.orders)
+        localStorage.setItem("orders", JSON.stringify(state.orders));
+      } else {
+        state.orders.push(payload);
+        localStorage.setItem("orders", JSON.stringify(state.orders));
+      }
+    },
+    //清空订单数据
+    removeOrder(state) {
+      state.orders = [],
+        localStorage.setItem("orders", JSON.stringify(state.orders));
+    },
+    //消费余额
+    paymoney(state, payload) {
+      state.money = Number(state.money) - payload;
+      if (state.money<0) {
+        Toast.fail("余额不足，支付失败 !");
+        return;
+      }
+      localStorage.setItem("money", JSON.stringify(state.money));
+    }
   },
   actions: {},
   modules: {},

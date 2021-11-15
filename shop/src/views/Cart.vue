@@ -117,9 +117,28 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["removecart", "delecart"]),
+    ...mapMutations(["removecart", "delecart","order"]),
+
+    // get() {
+    //   this.axios
+    //     .get("/cart/list", {
+    //       headers: {
+    //         "Authori-zation": "Bearer " + this.token,
+    //       },
+    //     })
+    //     .then((res) => {
+    //       console.log(res);
+    //     });
+    // },
     // 提交订单
-    submit(){
+    submit() {
+      this.cartShop.forEach(v=>{
+        if(v !="1"){
+          if(v.ze){
+            this.order(v);
+          }
+        }
+      })
       this.$router.push("/submit");
     },
     //下面删除按钮点击事件回调
@@ -202,9 +221,10 @@ export default {
     } else {
       this.checked = true;
     }
+    // this.get();
   },
   computed: {
-    ...mapState(["cartShop"]),
+    ...mapState(["cartShop", "token"]),
   },
 };
 </script>

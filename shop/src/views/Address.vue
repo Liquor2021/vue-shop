@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import back from "../components/Back.vue";
 // import { Toast } from "vant";
 export default {
@@ -35,6 +36,7 @@ export default {
           name: "李四",
           tel: "1310000000",
           address: "浙江省杭州市拱墅区莫干山路 50 号",
+          isDefault: false,
         },
       ],
       disabledList: [
@@ -43,6 +45,7 @@ export default {
           name: "王五",
           tel: "1320000000",
           address: "浙江省杭州市滨江区江南大道 15 号",
+          isDefault: false,
         },
       ],
     };
@@ -51,22 +54,40 @@ export default {
     back,
   },
   methods: {
-    get() {
-      this.axios.get("/address/list?page=1&limit=20").then((res) => {
-        console.log(res);
-      });
-    },
+    // get() {
+    //   this.axios
+    //     .get("/address/list?page=1&limit=20", {
+    //       headers: {
+    //         "Authori-zation": "Bearer " + this.token,
+    //       },
+    //     })
+    //     .then((res) => {
+    //         console.log(res);
+    //       for (let i = 0; i < res.length; i++) {
+              
+    //         this.list[i].id = res.data[i].id;
+    //         this.list[i].name = res.data[i].real_name;
+    //         this.list[i].tel = res.data[i].phone;
+    //       }
+    //     });
+    // },
     onAdd() {
-    //   Toast("新增地址");
-      this.$router.push({path:'/editaddress1'});
+      //   Toast("新增地址");
+      this.$router.push({ path: "/editaddress1" });
     },
     onEdit(item, index) {
-    //   Toast("编辑地址:" + index);
-      this.$router.push({path:'/editaddress',query:{arr:this.list[index]}});
+      //   Toast("编辑地址:" + index);
+      this.$router.push({
+        path: "/editaddress",
+        query: { arr: this.list[index] },
+      });
     },
   },
   created() {
-    //   this.get();
+    // this.get();
+  },
+  computed: {
+    ...mapState(["token"]),
   },
 };
 </script>

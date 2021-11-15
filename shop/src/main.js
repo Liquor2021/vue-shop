@@ -39,6 +39,7 @@ import {
   AddressList,
   AddressEdit,
   CouponCell, CouponList,
+  Loading,
 } from 'vant';
 Vue.use(Tabbar).use(TabbarItem); //Tabbar 标签栏
 Vue.use(Tab).use(Tabs); //顶部标签页
@@ -69,6 +70,7 @@ Vue.use(ContactCard);//联系人卡片
 Vue.use(AddressList);//地址列表
 Vue.use(AddressEdit);//地址编辑
 Vue.use(CouponCell).use(CouponList);//优惠券选择器
+Vue.use(Loading);//加载
 
 Vue.config.productionTip = false
 
