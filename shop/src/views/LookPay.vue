@@ -70,10 +70,10 @@
     <div class="look_money">
       <van-cell title="支付金额" :value="'￥' + $route.query.paymoney" />
       <van-cell title="积分抵扣" value="￥0" />
-      <van-cell title="" value="实际付款：￥0" size="large" class="All_pay" />
+      <van-cell title="" :value="value" size="large" class="All_pay" />
     </div>
     <!-- 申请退款 -->
-    <div class="refund">
+    <div class="refund" @click="refund">
       <p>申请退款</p>
     </div>
   </div>
@@ -81,7 +81,7 @@
 
 <script>
 import back from "../components/Back.vue";
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -92,33 +92,67 @@ export default {
       price: [], //商品价格
       num: [], //商品数量
       thumb: [], //商品图片
+      value: "实际付款：￥0",
     };
   },
   created() {
     setTimeout(() => {
+      if (this.$route.query.paymoney) {
+        this.value = "实际付款：￥" + this.$route.query.paymoney;
+      } else {
+        this.value = "实际付款：￥" + this.$route.query.price;
+      }
       //计算订单有几件商品
-      this.length = this.orders.length;
-      //商品卡片赋值
-      this.orders.forEach((v) => {
-        if (v.pic) {
-          this.desc.push(v.msg);
-          this.price.push(v.price);
-          this.num.push(v.selectedNum);
-          this.thumb.push(v.pic);
-        } else {
-          this.desc.push(v.store_name);
-          this.price.push(v.price);
-          this.num.push(v.selectedNum);
-          this.thumb.push(v.image);
-        }
-      });
+      if (this.orders[0].msg || this.orders[0].store_name) {
+        this.length = this.orders.length;
+        //商品卡片赋值
+        this.orders.forEach((v) => {
+          if (v.pic) {
+            this.desc.push(v.msg);
+            this.price.push(v.price);
+            this.num.push(v.selectedNum);
+            this.thumb.push(v.pic);
+          } else {
+            this.desc.push(v.store_name);
+            this.price.push(v.price);
+            this.num.push(v.selectedNum);
+            this.thumb.push(v.image);
+          }
+        });
+      } else {
+        localStorage.setItem("orders", this.orders[0]);
+        this.length = this.orders[0].length;
+        //商品卡片赋值
+        this.orders[0].forEach((v) => {
+          if (v.pic) {
+            this.desc.push(v.msg);
+            this.price.push(v.price);
+            this.num.push(v.selectedNum);
+            this.thumb.push(v.pic);
+          } else {
+            this.desc.push(v.store_name);
+            this.price.push(v.price);
+            this.num.push(v.selectedNum);
+            this.thumb.push(v.image);
+          }
+        });
+      }
     }, 1000);
+  },
+  methods: {
+    ...mapMutations(["removeShop"]),
+    refund() {
+      let index = this.waits.indexOf(this.orders);
+      console.log(index);
+      this.removeShop();
+      this.$router.push('/home');
+    },
   },
   components: {
     back,
   },
   computed: {
-    ...mapState(["orders"]),
+    ...mapState(["orders", "waits"]),
   },
 };
 </script>

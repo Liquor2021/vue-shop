@@ -1,9 +1,9 @@
 <template>
-  <!-- 积分商城 -->
-  <div class="shop">
+  <!-- 我的收藏 -->
+  <div class="footprint">
     <back :title="name"></back>
-    <img src="../assets/img/me/up.svg" />
-    <p>积分乐园升级啦！<br />请下载或更新最新版官方商城APP进行体验哦！</p>
+    <img src="../assets/img/me/foot.svg" />
+    <p>暂无收藏数据，赶紧逛起来吧~</p>
   </div>
 </template>
 
@@ -12,7 +12,7 @@ import back from "../components/Back.vue";
 export default {
   data() {
     return {
-      name: "积分商城",
+      name: "我的收藏",
     };
   },
   components: {
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.shop {
+.footprint {
   background-color: #f6f6f6;
   height: 100vh;
   img {
@@ -32,12 +32,12 @@ export default {
     margin-bottom: 20px;
   }
   p {
-      width: 100vw;
-      display: inline-block;
+    width: 100vw;
+    display: inline-block;
     font-size: 14px;
     text-align: center;
     color: #aaaaaa;
-    line-height: 26px;
+    line-height: 18px;
   }
 }
 </style>

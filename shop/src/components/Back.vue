@@ -17,17 +17,27 @@
 <script>
 import { mapMutations } from "vuex";
 export default {
-  props: ["title"],
+  props: ["title", "orders"],
   methods: {
-    ...mapMutations(["removeOrder"]),
+    ...mapMutations(["removeOrder", "noPay"]),
     home() {
       this.$router.push("/home");
       this.$root.active = 0;
+      if (this.title == "订单详情") {
+        // 未支付订单存储
+        this.noPay(this.orders);
+        // 清空订单数据
+        //如果是订单详情页面返回的话执行清空订单数据
+        this.removeOrder();
+      }
     },
     back() {
       this.$router.back();
-      //如果是订单详情页面返回的话执行清空订单数据
       if (this.title == "订单详情") {
+        // 未支付订单存储
+        this.noPay(this.orders);
+        // 清空订单数据
+        //如果是订单详情页面返回的话执行清空订单数据
         this.removeOrder();
       }
     },

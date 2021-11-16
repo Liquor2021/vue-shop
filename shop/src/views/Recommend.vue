@@ -1,11 +1,15 @@
 <template>
+  <!-- 推荐页 -->
   <div class="recommend">
     <!-- banner -->
     <banner :banner="index.banner"></banner>
 
     <div class="grid">
       <!-- 每日签到 -->
-      <span><img src="../assets/img/com_1.png" /><b>每日签到</b></span>
+      <span @click="sign">
+        <img src="../assets/img/com_1.png" />
+        <b>每日签到</b>
+      </span>
       <!-- 新品上市 -->
       <span @click="$router.push('/newArrival')">
         <img src="../assets/img/com_2.png" />
@@ -44,7 +48,12 @@
 
     <!-- 新品上线 -->
     <h2 class="rec_h2">新品上线</h2>
-    <div class="img_box" v-for="re in recommend_new[0].data" :key="re.id" @click="ToDetails1($event, re)">
+    <div
+      class="img_box"
+      v-for="re in recommend_new[0].data"
+      :key="re.id"
+      @click="ToDetails1($event, re)"
+    >
       <img :src="re.pic" />
       <!-- <h5 class="bef">新品上线 立即选购</h5> -->
       <!-- <img :src="icons[1].right" class="ic_right" /> -->
@@ -79,9 +88,10 @@
 </template>
 
 <script>
+import { Toast } from "vant";
 import { mapMutations } from "vuex";
 import banner from "../components/Banner.vue";
-import recommend_new from '../mock-data/recommend_new'
+import recommend_new from "../mock-data/recommend_new";
 export default {
   //   props: ["id"],
   data() {
@@ -115,6 +125,8 @@ export default {
     };
   },
   created() {
+    // 清空订单数据
+    this.removeOrder();
     this.$root.active = 0;
     this.axios.get("/index").then((res) => {
       this.index = res.data;
@@ -126,7 +138,7 @@ export default {
     });
   },
   methods: {
-    ...mapMutations(["msg"]),
+    ...mapMutations(["msg", "removeOrder"]),
     ToDetails(event, value) {
       this.$router.push({ path: "/details", query: { id: value.id } });
       this.msg(value);
@@ -134,6 +146,9 @@ export default {
     ToDetails1(event, value) {
       this.$router.push({ path: "/details2", query: { id: value.id } });
       this.msg(value);
+    },
+    sign() {
+      Toast.success(` 签 到 成 功 ~`);
     },
   },
   mounted() {},

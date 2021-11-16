@@ -149,7 +149,7 @@ export default {
       this.length = this.orders.length;
       //   console.log(this.orders);
       //商品卡片赋值
-      this.orders.forEach((v) => {
+      this.orders[0].forEach((v) => {
         if (v.pic) {
           this.desc.push(v.msg);
           this.price.push(v.price);
@@ -171,7 +171,13 @@ export default {
     }, 1000);
   },
   methods: {
-    ...mapMutations(["removeOrder", "paymoney", "waitSend", "storageTime"]),
+    ...mapMutations([
+      "removeOrder",
+      "paymoney",
+      "waitSend",
+      "storageTime",
+      "noarr",
+    ]),
     onChange(index) {
       //   this.showList = false;
       this.chosenCoupon = index;
@@ -187,6 +193,8 @@ export default {
         this.paymoney(this.Allprice / 100);
         // 余额大于消费额才跳转
         if (this.money > this.Allprice / 100) {
+          console.log(this.orders);
+          this.orders.nopay = true;
           this.waitSend(this.orders);
           // 提交加载动画
           Toast.loading({
@@ -206,13 +214,13 @@ export default {
             m = m < 10 ? "0" + m : m;
             s = s < 10 ? "0" + s : s;
             let time = `${Y}-${M}-${D} ${h}:${m}:${s}`;
-            let num = { time: time, Allprice: this.Allprice/100 };
+            let num = { time: time, Allprice: this.Allprice / 100 };
             this.storageTime(num);
-            clearTimeout(t);
             this.$router.push({
               path: "/PaySucceed",
               query: { pay: this.Allprice / 100, time: time },
             });
+            clearTimeout(t);
           }, 1000);
         }
       }

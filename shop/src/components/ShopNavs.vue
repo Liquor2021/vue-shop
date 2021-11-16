@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { Toast } from "vant";
 import { mapMutations } from "vuex";
 export default {
   props: ["msg"],
@@ -131,7 +132,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["addcart"]),
+    ...mapMutations(["addcart", "order"]),
     onStar() {
       if (this.colorshow == "#ccc") {
         this.text = "已收藏";
@@ -150,16 +151,27 @@ export default {
       this.show = true;
     },
     //立即购买
-    onBuyClicked() {
+    onBuyClicked(event) {
       this.show = false;
+      Toast.loading({
+        message: "订单加载中...",
+        forbidClick: true,
+      });
+      this.msg.selectedNum = event.selectedNum;
+      this.msg.ze = false;
+      this.order(this.msg);
+      let t = setTimeout(() => {
+        clearTimeout(t);
+        this.$router.push("/submit");
+      }, 1000);
     },
     //添加购物车
     onAddCartClicked(event) {
       // console.log(event);
       this.show = false;
       //把购买数量添加进去
-      this.msg.selectedNum=event.selectedNum;
-      this.msg.ze=false;
+      this.msg.selectedNum = event.selectedNum;
+      this.msg.ze = false;
       this.addcart(this.msg);
     },
   },

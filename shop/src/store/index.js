@@ -16,6 +16,7 @@ export default new Vuex.Store({
     money: 0, //余额
     waits: [], //存储已完成待发货的订单数据
     time: [], //存储所有订单时间
+    noarr: [], // 未支付订单存储
   },
   getters: {
     //localStorage获取
@@ -81,6 +82,13 @@ export default new Vuex.Store({
       }
       return state.time;
     },
+    //获取未支付
+    getno(state) {
+      if (state.noarr == null || state.noarr.length < 1) {
+        state.noarr = JSON.parse(localStorage.getItem("noarr"));
+      }
+      return state.noarr;
+    },
 
   },
   mutations: {
@@ -141,7 +149,7 @@ export default new Vuex.Store({
     },
     //加入订单
     order(state, payload) {
-      if (state.orders.length < 1) {
+      if (state.orders == null || state.orders.length < 1) {
         state.orders = payload;
         state.orders = Array(state.orders)
         localStorage.setItem("orders", JSON.stringify(state.orders));
@@ -167,7 +175,11 @@ export default new Vuex.Store({
     //存储已完成待发货的订单数据
     waitSend(state, payload) {
       if (state.waits == null || state.waits.length < 1) {
-        state.waits = Array(payload);
+        if (payload.nopay != null || payload.nopay == true) {
+          state.waits = payload
+        } else {
+          state.waits = Array(payload);
+        }
         // if (typeof state.waits != Array) {
         //   state.waits = Array(state.waits);
         // }
@@ -189,6 +201,31 @@ export default new Vuex.Store({
         state.time.unshift(payload);
         localStorage.setItem("time", JSON.stringify(state.time));
       }
+    },
+    // 未支付订单存储
+    noPay(state, payload) {
+      if (state.noarr == null || state.noarr.length < 1) {
+        state.noarr = payload;
+        if (typeof state.noarr != Array) {
+          state.noarr = Array(state.noarr);
+        }
+        localStorage.setItem("noarr", JSON.stringify(state.noarr));
+      } else {
+        state.noarr.unshift(payload);
+        localStorage.setItem("noarr", JSON.stringify(state.noarr));
+      }
+    },
+    // 删除未支付订单
+    removepay(state, payload) {
+      state.noarr.splice(payload, 1);
+      localStorage.setItem("noarr", JSON.stringify(state.noarr));
+    },
+    //退款
+    removeShop(state, payload) {
+      state.waits.splice(payload, 1);
+      state.time.splice(payload, 1);
+      localStorage.setItem("waits", JSON.stringify(state.waits));
+      localStorage.setItem("time", JSON.stringify(state.time));
     },
   },
   actions: {},

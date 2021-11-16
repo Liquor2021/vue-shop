@@ -73,7 +73,7 @@
       <van-cell title="" :value="value" size="large" class="All_pay" />
     </div>
     <!-- 申请退款 -->
-    <div class="refund">
+    <div class="refund" @click="refund">
       <p>申请退款</p>
     </div>
   </div>
@@ -81,7 +81,7 @@
 
 <script>
 import back from "../components/Back.vue";
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -97,7 +97,12 @@ export default {
   },
   created() {
     setTimeout(() => {
-      this.value = "实际付款：￥" + this.$route.query.price;
+      if (this.$route.query.paymoney) {
+        this.value = "实际付款：￥" + this.$route.query.paymoney;
+      } else {
+        this.value = "实际付款：￥" + this.$route.query.price;
+      }
+
       //计算订单有几件商品
       this.length = this.waits[this.$route.query.i].length;
       //商品卡片赋值
@@ -115,6 +120,13 @@ export default {
         }
       });
     }, 1000);
+  },
+  methods: {
+    ...mapMutations(["removeShop"]),
+    refund() {
+      this.removeShop(this.$route.query.i);
+      this.$router.push('/me');
+    },
   },
   components: {
     back,

@@ -42,7 +42,7 @@
       </div>
     </div>
     <!-- 会员特权说明 -->
-    <router-view :show="me_show"/>
+    <router-view :show="me_show" />
 
     <!-- 我的订单 -->
     <div class="order" v-show="me_show">
@@ -145,15 +145,15 @@
             <img :src="me[0].serve[0].pic" class="or_pic" />
             <p class="or_msg">{{ me[0].serve[0].msg }}</p>
           </div>
-          <div class="or_smbox four" @click="$router.push('/coin')">
+          <div class="or_smbox four" @click="yu_e">
             <img :src="me[0].serve[1].pic" class="or_pic" />
             <p class="or_msg">{{ me[0].serve[1].msg }}</p>
           </div>
-          <div class="or_smbox four" @click="$router.push('/coin')">
+          <div class="or_smbox four" @click="$router.push('/collect')">
             <img :src="me[0].serve[2].pic" class="or_pic" />
             <p class="or_msg">{{ me[0].serve[2].msg }}</p>
           </div>
-          <div class="or_smbox four" @click="$router.push('/coin')">
+          <div class="or_smbox four" @click="$router.push('/service')">
             <img :src="me[0].serve[3].pic" class="or_pic" />
             <p class="or_msg">{{ me[0].serve[3].msg }}</p>
           </div>
@@ -166,6 +166,9 @@
 
 
 <script>
+import { Toast } from "vant";
+import { Dialog } from "vant";
+import { mapState } from "vuex";
 import me from "../mock-data/me";
 export default {
   data() {
@@ -177,16 +180,29 @@ export default {
   created() {
     this.$root.active = 4;
   },
-  methods:{
-    back(){
+  methods: {
+    back() {
       this.$router.back();
       this.me_show = true;
     },
-    tomember(){
-      this.$router.push('/member');
+    tomember() {
+      this.$router.push("/member");
       this.me_show = false;
-    }
-  }
+    },
+    yu_e() {
+      Dialog.confirm({
+        title: "余额查询",
+        message: "是否查询当前余额",
+      })
+        .then(() => {
+          Toast(`当前余额：￥${this.money}`);
+        })
+        .catch(() => {});
+    },
+  },
+  computed: {
+    ...mapState(["money"]),
+  },
 };
 </script>
 

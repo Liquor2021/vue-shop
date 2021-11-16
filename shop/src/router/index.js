@@ -173,10 +173,20 @@ const routes = [{
     name: 'Shop',
     component: () => import('../views/Shop.vue')
   },
+  { //客服中心
+    path: '/service',
+    name: 'Service',
+    component: () => import('../views/Service.vue')
+  },
   { //我的足迹
     path: '/footprint',
     name: 'Footprint',
     component: () => import('../views/Footprint.vue')
+  },
+  { //我的收藏
+    path: '/collect',
+    name: 'Collect',
+    component: () => import('../views/Collect.vue')
   },
   { //设置
     path: '/set',
@@ -232,6 +242,11 @@ const routes = [{
     path: '/submit',
     name: 'Submit',
     component: () => import('../views/Submit.vue')
+  },
+  { //提交订单
+    path: '/submit1',
+    name: 'Submit1',
+    component: () => import('../views/Submit1.vue')
   },
   { //订单支付成功
     path: '/PaySucceed',
