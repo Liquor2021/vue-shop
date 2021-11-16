@@ -9,7 +9,7 @@
       </b>
     </h1>
     <!-- 没有物品时的显示界面 -->
-    <div class="cartnone" v-if="!cartShop">
+    <div class="cartnone" v-if="!cartShop || cartShop[0] == '1'">
       <!-- <img
         src="https://m.assets.shop.hisense.com/assets/files/cart-empty.27c2747601484e9d.png"
       /> -->
@@ -117,7 +117,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["removecart", "delecart","order","removeOrder"]),
+    ...mapMutations(["removecart", "delecart", "order", "removeOrder"]),
 
     // get() {
     //   this.axios
@@ -132,13 +132,16 @@ export default {
     // },
     // 提交订单
     submit() {
-      this.cartShop.forEach(v=>{
-        if(v !="1"){
-          if(v.ze){
+      this.cartShop.forEach((v) => {
+        if (v != "1") {
+          if (v.ze) {
             this.order(v);
+            this.delecart(v);
           }
         }
-      })
+      });
+      this.num = 0;
+      localStorage.setItem("num", this.num);
       this.$router.push("/submit");
     },
     //下面删除按钮点击事件回调
@@ -175,9 +178,20 @@ export default {
         localStorage.setItem("checked", this.checked);
         localStorage.setItem("cartShop", JSON.stringify(this.cartShop));
       } else {
+        let i = 0; //选中个数
         ze = false;
         this.num = this.num + ca.selectedNum * ca.price * 100;
         localStorage.setItem("cartShop", JSON.stringify(this.cartShop));
+        // 选中的个数等于购物车的长度 就全选
+        this.cartShop.forEach((v) => {
+          if (v.ze == true) {
+            i++;
+            if (i == this.cartShop.length - 1) {
+              this.checked = true;
+              localStorage.setItem("checked", this.checked);
+            }
+          }
+        });
       }
       localStorage.setItem("num", this.num);
     },
@@ -234,7 +248,7 @@ export default {
 
 <style lang="less" >
 .cart {
-  padding-bottom: 50px;
+  padding-bottom: 134px;
   background-color: #f6f6f6;
   min-height: 100vh;
   box-sizing: border-box;

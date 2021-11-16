@@ -243,6 +243,11 @@ const routes = [{
     name: 'LookPay',
     component: () => import('../views/LookPay.vue')
   },
+  { //待收货查看详情
+    path: '/LookPay1',
+    name: 'LookPay1',
+    component: () => import('../views/LookPay1.vue')
+  },
 ]
 
 const router = new VueRouter({

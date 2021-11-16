@@ -1,7 +1,7 @@
 <template>
   <!-- 订单支付成功 -->
   <div class="PaySucceed">
-    <back :title="name"></back>
+    <!-- <back :title="name"></back> -->
     <div class="suc_box">
       <img src="../assets/img/submit/r.svg" />
       <h1>订单支付成功</h1>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import back from "../components/Back.vue";
+// import back from "../components/Back.vue";
 export default {
   data() {
     return {
@@ -32,13 +32,16 @@ export default {
     look() {
       this.$router.push({
         path: "/LookPay",
-        query: { time: this.$route.query.time },
+        query: {
+          time: this.$route.query.time,
+          paymoney: this.$route.query.pay,
+        },
       });
     },
   },
   computed: {},
   components: {
-    back,
+    // back,
   },
 };
 </script>

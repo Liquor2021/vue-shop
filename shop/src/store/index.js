@@ -15,6 +15,7 @@ export default new Vuex.Store({
     orders: [], //订单数据
     money: 0, //余额
     waits: [], //存储已完成待发货的订单数据
+    time: [], //存储所有订单时间
   },
   getters: {
     //localStorage获取
@@ -66,13 +67,21 @@ export default new Vuex.Store({
       }
       return state.money;
     },
-    // 获取待发货
+    // 获取待发货数据
     getsend(state) {
       if (state.waits == null || state.waits.length < 1) {
         state.waits = JSON.parse(localStorage.getItem("waits"));
       }
       return state.waits;
     },
+    //获取订单时间
+    getTime(state) {
+      if (state.time == null || state.time.length < 1) {
+        state.time = JSON.parse(localStorage.getItem("time"));
+      }
+      return state.time;
+    },
+
   },
   mutations: {
     //保存登录token
@@ -158,16 +167,29 @@ export default new Vuex.Store({
     //存储已完成待发货的订单数据
     waitSend(state, payload) {
       if (state.waits == null || state.waits.length < 1) {
-        state.waits = payload;
-        if (typeof state.waits == Object) {
-          state.waits = Array(state.waits);
-        }
+        state.waits = Array(payload);
+        // if (typeof state.waits != Array) {
+        //   state.waits = Array(state.waits);
+        // }
         localStorage.setItem("waits", JSON.stringify(state.waits));
       } else {
-        state.waits.push(payload);
+        state.waits.unshift(payload);
         localStorage.setItem("waits", JSON.stringify(state.waits));
       }
-    }
+    },
+    //存储订单时间
+    storageTime(state, payload) {
+      if (state.time == null || state.time.length < 1) {
+        state.time = payload;
+        if (typeof state.time != Array) {
+          state.time = Array(state.time);
+        }
+        localStorage.setItem("time", JSON.stringify(state.time));
+      } else {
+        state.time.unshift(payload);
+        localStorage.setItem("time", JSON.stringify(state.time));
+      }
+    },
   },
   actions: {},
   modules: {},

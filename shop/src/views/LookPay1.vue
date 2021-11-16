@@ -68,9 +68,9 @@
       <van-cell title="支付方式" value="余额支付" />
     </div>
     <div class="look_money">
-      <van-cell title="支付金额" :value="'￥' + $route.query.paymoney" />
+      <van-cell title="支付金额" :value="'￥' + $route.query.price" />
       <van-cell title="积分抵扣" value="￥0" />
-      <van-cell title="" value="实际付款：￥0" size="large" class="All_pay" />
+      <van-cell title="" :value="value" size="large" class="All_pay" />
     </div>
     <!-- 申请退款 -->
     <div class="refund">
@@ -92,14 +92,16 @@ export default {
       price: [], //商品价格
       num: [], //商品数量
       thumb: [], //商品图片
+      value: "实际付款：￥0",
     };
   },
   created() {
     setTimeout(() => {
+      this.value = "实际付款：￥" + this.$route.query.price;
       //计算订单有几件商品
-      this.length = this.orders.length;
+      this.length = this.waits[this.$route.query.i].length;
       //商品卡片赋值
-      this.orders.forEach((v) => {
+      this.waits[this.$route.query.i].forEach((v) => {
         if (v.pic) {
           this.desc.push(v.msg);
           this.price.push(v.price);
@@ -118,7 +120,7 @@ export default {
     back,
   },
   computed: {
-    ...mapState(["orders"]),
+    ...mapState(["waits"]),
   },
 };
 </script>

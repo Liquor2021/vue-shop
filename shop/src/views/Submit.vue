@@ -2,17 +2,20 @@
   <!-- 订单详情 -->
   <div class="submit">
     <back :title="name"></back>
-    <van-contact-card
-      type="edit"
-      name="张三"
-      tel="13000000000"
-      :editable="false"
-      class="card"
-    />
-    <p class="sub_address">
-      <b>地址：</b>
-      <span>浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室</span>
-    </p>
+    <!-- 地址栏 -->
+    <div class="address_box">
+      <van-contact-card
+        type="edit"
+        name="张三"
+        tel="13000000000"
+        :editable="false"
+        class="card"
+      />
+      <p class="sub_address">
+        <b>地址：</b>
+        <span>浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室</span>
+      </p>
+    </div>
     <h1>共{{ length }}件商品</h1>
     <!-- 商品卡片 -->
     <div v-if="length > 0">
@@ -168,7 +171,7 @@ export default {
     }, 1000);
   },
   methods: {
-    ...mapMutations(["removeOrder", "paymoney", "waitSend"]),
+    ...mapMutations(["removeOrder", "paymoney", "waitSend", "storageTime"]),
     onChange(index) {
       //   this.showList = false;
       this.chosenCoupon = index;
@@ -203,6 +206,8 @@ export default {
             m = m < 10 ? "0" + m : m;
             s = s < 10 ? "0" + s : s;
             let time = `${Y}-${M}-${D} ${h}:${m}:${s}`;
+            let num = { time: time, Allprice: this.Allprice/100 };
+            this.storageTime(num);
             clearTimeout(t);
             this.$router.push({
               path: "/PaySucceed",
@@ -238,23 +243,26 @@ export default {
   background-color: #f6f6f6;
   min-height: 100vh;
   padding-bottom: 20px;
-  .card {
-    margin-top: 2px;
-    padding-bottom: 44px;
-    margin-bottom: 10px;
-  }
-  .sub_address {
-    position: absolute;
-    font-size: 14px;
-    padding: 0px 40px;
-    top: 106px;
-    display: flex;
-    span {
-      flex: 1;
+  .address_box {
+    position: relative;
+    .card {
+      margin-top: 2px;
+      padding-bottom: 44px;
+      margin-bottom: 10px;
     }
-    b {
-      display: inline-block;
-      width: 44px;
+    .sub_address {
+      position: absolute;
+      font-size: 14px;
+      padding: 0px 40px;
+      top: 58px;
+      display: flex;
+      span {
+        flex: 1;
+      }
+      b {
+        display: inline-block;
+        width: 44px;
+      }
     }
   }
   h1 {
