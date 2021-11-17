@@ -2,7 +2,7 @@
   <div class="home">
     <!-- 顶部logo栏 -->
     <top-nav></top-nav>
-    <router-view :id="id"/>
+    <router-view :id="id" />
   </div>
 </template>
 
@@ -11,10 +11,11 @@
 import topNav from "../components/TopNav.vue";
 
 export default {
-  data(){
-    return{
-      id:99,
-    }
+  data() {
+    return {
+      id: 99,
+      num: 0,
+    };
   },
   components: {
     topNav, //顶部logo栏
@@ -24,8 +25,8 @@ export default {
       this.$router.push("/home/recommend");
     }
   },
-  updated(){
-      if (this.$route.name == "Home") {
+  updated() {
+    if (this.$route.name == "Home") {
       this.$router.push("/home/recommend");
     }
   },

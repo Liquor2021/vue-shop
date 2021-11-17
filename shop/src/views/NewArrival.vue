@@ -60,6 +60,9 @@ export default {
       name: "新品上市",
     };
   },
+  created(){
+    window.scrollTo(0, 0);
+  },
   methods: {
     ...mapMutations(["msg"]),
     ToDetails(event, value) {

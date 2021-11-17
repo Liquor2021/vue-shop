@@ -3,7 +3,7 @@
   <div class="details1">
     <!-- 顶部导航栏 -->
     <div class="details_nav">
-      <img src="../assets/img/left.svg" @click="$router.back()" />
+      <img src="../assets/img/left.svg" @click="back" />
       <img src="../assets/img/details/a.svg" @click="showPopup" />
       <van-popup
         v-model="Topshow"
@@ -105,10 +105,10 @@ export default {
       listshow: false,
       showAddr: "", //显示地址
       resAddr: "", //传给后端的位置信息
-      price:55,//价格
-      sales:222,//已售
-      store_name:"",//商品信息
-      msgg:[],//所有参数信息
+      price: 55, //价格
+      sales: 222, //已售
+      store_name: "", //商品信息
+      msgg: [], //所有参数信息
     };
   },
   methods: {
@@ -140,6 +140,10 @@ export default {
       let val = picker.getValues();
       this.resAddr = val;
     },
+    back() {
+      this.$router.back();
+      // this.$emit('num',1);
+    },
   },
   computed: {
     ...mapState(["msg"]),
@@ -147,18 +151,18 @@ export default {
   created() {
     window.scrollTo(0, 0);
     if (this.msg.id) {
-      this.msgg=this.msg;
+      this.msgg = this.msg;
       this.banner.push(this.msg.pic);
-      this.price=this.msg.price;
-      this.sales=parseInt(this.msg.price/5);
-      this.store_name=this.msg.msg;
+      this.price = this.msg.price;
+      this.sales = parseInt(this.msg.price / 5);
+      this.store_name = this.msg.msg;
     } else {
       let a = JSON.parse(localStorage.getItem("msg"));
-      this.msgg=a;
+      this.msgg = a;
       this.banner.push(a.pic);
-      this.price=a.price;
-      this.sales=parseInt(a.price/2);
-      this.store_name=a.msg;
+      this.price = a.price;
+      this.sales = parseInt(a.price / 2);
+      this.store_name = a.msg;
     }
   },
   components: {

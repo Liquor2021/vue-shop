@@ -35,9 +35,26 @@ export default {
         this.$router.push("/classify");
       }
     },
-    recommend(){
+    recommend() {
       this.$router.push("/home/recommend");
     },
+  },
+  created() {
+    // console.log(this.$route.path);
+    //当前url路由地址
+    if (this.$route.path == "/home/appliances") {
+      this.active = 1;
+    } else if (this.$route.path == "/home/clothing") {
+      this.active = 2;
+    } else if (this.$route.path == "/home/audio") {
+      this.active = 3;
+    } else if (this.$route.path == "/home/food") {
+      this.active = 4;
+    } else if (this.$route.path == "/home/life") {
+      this.active = 5;
+    } else {
+      this.active = 0;
+    }
   },
 };
 </script>

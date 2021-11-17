@@ -125,6 +125,7 @@ export default {
     };
   },
   created() {
+    window.scrollTo(0, 0);
     // 清空订单数据
     this.removeOrder();
     this.$root.active = 0;
