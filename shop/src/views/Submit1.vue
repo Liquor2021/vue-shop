@@ -193,9 +193,9 @@ export default {
         this.paymoney(this.Allprice / 100);
         // 余额大于消费额才跳转
         if (this.money > this.Allprice / 100) {
-          console.log(this.orders);
+          // console.log(this.orders);
           this.orders.nopay = true;
-          this.waitSend(this.orders);
+          this.waitSend(this.orders[0]);
           // 提交加载动画
           Toast.loading({
             message: "订单支付成功...",

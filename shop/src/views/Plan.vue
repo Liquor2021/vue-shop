@@ -9,7 +9,7 @@
       line-height="2px"
     >
       <van-tab title="全部">
-        <pending v-if="waits"></pending>
+        <pending v-if="waits && waits.length > 0"></pending>
         <div v-if="show">
           <svg
             width="148"
@@ -60,10 +60,10 @@
           </svg>
           <p>您还没有全部订单，快去抢购吧~</p>
         </div>
-        <nopay v-if="noarr"></nopay>
+        <nopay v-if="noarr && noarr.length > 0"></nopay>
       </van-tab>
       <van-tab title="待付款">
-        <nopay v-if="noarr"></nopay>
+        <nopay v-if="noarr && noarr.length > 0"></nopay>
         <div v-else>
           <svg
             width="148"
@@ -144,7 +144,7 @@
         </div>
       </van-tab>
       <van-tab title="待发货">
-        <pending v-if="waits"></pending>
+        <pending v-if="waits && waits.length > 0"></pending>
         <div v-else>
           <svg
             width="148"
@@ -279,9 +279,9 @@ export default {
   },
   created() {
     this.active = Number(this.$route.query.active);
-    if (this.waits) {
+    if (this.waits && this.waits.length > 0) {
       this.show = false;
-    } else if (this.noarr) {
+    } else if (this.noarr && this.noarr.length > 0) {
       this.show = false;
     } else {
       this.show = true;

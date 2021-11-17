@@ -140,7 +140,7 @@
         <div class="or_top">
           <span class="my_order">自助服务</span>
         </div>
-        <div class="or_bottom">
+        <div class="or_bottom"> 
           <div class="or_smbox four" @click="$router.push('/address')">
             <img :src="me[0].serve[0].pic" class="or_pic" />
             <p class="or_msg">{{ me[0].serve[0].msg }}</p>

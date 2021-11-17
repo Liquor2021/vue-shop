@@ -166,6 +166,7 @@ export default {
     background-color: #2c3167;
     height: 60px;
     line-height: 40px;
+    overflow: hidden;
     img {
       position: absolute;
       left: 20px;

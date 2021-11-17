@@ -17,6 +17,7 @@ export default new Vuex.Store({
     waits: [], //存储已完成待发货的订单数据
     time: [], //存储所有订单时间
     noarr: [], // 未支付订单存储
+    refund: [], //退款
   },
   getters: {
     //localStorage获取
@@ -89,6 +90,13 @@ export default new Vuex.Store({
       }
       return state.noarr;
     },
+    //获取退款
+    getrefund(state) {
+      if (state.refund == null || state.refund.length < 1) {
+        state.refund = JSON.parse(localStorage.getItem("refund"));
+      }
+      return state.refund;
+    }
 
   },
   mutations: {
@@ -222,6 +230,14 @@ export default new Vuex.Store({
     },
     //退款
     removeShop(state, payload) {
+      if (state.refund == null || state.refund.length < 1) {
+        state.refund = Array(state.waits[payload]);
+        localStorage.setItem("refund", JSON.stringify(state.refund));
+      } else {
+        state.refund.unshift(state.waits[payload]);
+        localStorage.setItem("refund", JSON.stringify(state.refund));
+      }
+
       state.waits.splice(payload, 1);
       state.time.splice(payload, 1);
       localStorage.setItem("waits", JSON.stringify(state.waits));

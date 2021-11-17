@@ -58,7 +58,7 @@ export default {
   created() {
     // setTimeout(() => {
       this.noarr.forEach((v, i) => {
-        console.log(this.price);
+        // console.log(this.price);
         if (this.price.length < 1) {
           this.price[i] = v[0].price;
           //   this.price = Array(this.price);
